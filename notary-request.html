@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notary Request — TN Legal Services Ltd.</title>
+  <meta name="description" content="Submit your notary service request online. Upload documents securely and our team will contact you within 24 hours." />
+  <meta name="theme-color" content="#000000" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tnlegal.ca/notary-request.html" />
+  <meta property="og:title" content="Notary Request — TN Legal Services Ltd." />
+  <meta property="og:description" content="Submit your notary service request online. Upload documents securely and our team will contact you within 24 hours." />
+  <meta property="og:image" content="https://tnlegal.ca/logo.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://tnlegal.ca/notary-request.html" />
+  <meta property="twitter:title" content="Notary Request — TN Legal Services Ltd." />
+  <meta property="twitter:description" content="Submit your notary service request online. Upload documents securely and our team will contact you within 24 hours." />
+  <meta property="twitter:image" content="https://tnlegal.ca/logo.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://tnlegal.ca/notary-request.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/site.css" />
+
+  <style>
+    /* File upload custom styling */
+    .file-upload-wrapper {
+      position: relative;
+      margin-bottom: 0.75rem;
+    }
+
+    .file-upload-input {
+      width: 100%;
+      padding: 0.9rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      color: var(--pure-white);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .file-upload-input:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .file-upload-input:focus {
+      outline: none;
+      border-color: var(--silver);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .file-upload-input::file-selector-button {
+      padding: 0.5rem 1rem;
+      margin-right: 1rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      color: var(--pure-white);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .file-upload-input::file-selector-button:hover {
+      background: rgba(255,255,255,0.15);
+      border-color: var(--silver);
+    }
+
+    .file-help-text {
+      font-size: 0.8rem;
+      color: var(--silver);
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .success-message {
+      display: none;
+      padding: 2rem;
+      background: rgba(0, 255, 0, 0.1);
+      border: 1px solid rgba(0, 255, 0, 0.3);
+      border-radius: 8px;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .success-message h3 {
+      font-family: 'Cinzel', 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--pure-white);
+    }
+
+    .success-message p {
+      color: var(--silver);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="TN Legal Services" />
+        <span class="nav-logo-text">TN LEGAL SERVICES</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="news.html" class="nav-link">News</a></li>
+        <li class="nav-item"><a href="online-services.html" class="nav-link">Online Services</a></li>
+        <li class="nav-item"><a href="notary-request.html" class="nav-link active">Notary Request</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container page-hero__shell">
+        <span class="page-hero__eyebrow">Notary Services</span>
+        <h1 class="page-hero__title">Submit Your Notary Request</h1>
+        <p class="page-hero__lead">
+          Upload your documents now for fast, fully electronic notarization. Pay instantly online and request same-day service — all paperwork completed digitally and delivered to your inbox within hours.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container" style="max-width: 800px;">
+        <div class="contact-card">
+          <h2 class="contact-card__title">Notary Request Form</h2>
+
+          <form
+            id="notary-request-form"
+            name="notary-request"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <!-- Honeypot field for spam protection -->
+            <p style="display: none;">
+              <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
+
+            <input type="hidden" name="form-name" value="notary-request" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="full-name">Full Name *</label>
+                <input type="text" id="full-name" name="full-name" class="form-input" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="email">Email Address *</label>
+                <input type="email" id="email" name="email" class="form-input" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" class="form-input" required />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="notarization-type">Type of Notarization *</label>
+                <select id="notarization-type" name="notarization-type" class="form-input" required>
+                  <option value="">Select type...</option>
+                  <option value="affidavit">Affidavit</option>
+                  <option value="statutory-declaration">Statutory Declaration</option>
+                  <option value="certified-true-copy">Certified True Copy</option>
+                  <option value="commissioner-oath">Commissioner of Oaths</option>
+                  <option value="power-of-attorney">Power of Attorney</option>
+                  <option value="consent-travel">Consent to Travel</option>
+                  <option value="other">Other (please specify in description)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="num-signatures">Number of Signatures Required *</label>
+              <select id="num-signatures" name="num-signatures" class="form-input" required>
+                <option value="">Select number...</option>
+                <option value="1">1 signature</option>
+                <option value="2">2 signatures</option>
+                <option value="3">3 signatures</option>
+                <option value="4">4 signatures</option>
+                <option value="5+">5 or more signatures</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="description">Description of Service Needed *</label>
+              <textarea
+                id="description"
+                name="description"
+                class="form-textarea"
+                rows="5"
+                placeholder="Please provide details about your notarization needs, including any specific requirements or deadlines."
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="documents">Upload Documents</label>
+              <div class="file-upload-wrapper">
+                <input
+                  type="file"
+                  id="documents"
+                  name="documents"
+                  class="file-upload-input"
+                  multiple
+                  accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.gif,.txt,.rtf,.odt"
+                />
+              </div>
+              <p class="file-help-text">
+                You can upload multiple files (PDF, Word, images, etc.). Maximum total size: 10MB combined. Accepted formats: PDF, DOC, DOCX, JPG, PNG, GIF, TXT, RTF, ODT. Please do not upload executable files.
+              </p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="preferred-date">Preferred Appointment Date/Time</label>
+              <input type="text" id="preferred-date" name="preferred-date" class="form-input" placeholder="e.g., Next week, Tuesday afternoon, ASAP" />
+              <p class="file-help-text">Optional: Let us know your availability and we'll do our best to accommodate.</p>
+            </div>
+
+            <div class="form-group" style="display: flex; align-items: flex-start; gap: 0.75rem;">
+              <input type="checkbox" id="consent" name="consent" required style="margin-top: 0.3rem; width: 18px; height: 18px; cursor: pointer;">
+              <label for="consent" style="font-size: 0.85rem; color: var(--silver); line-height: 1.6; cursor: pointer; text-transform: none; letter-spacing: normal; font-weight: 400;">
+                I understand that submitting this form does not create a lawyer-client relationship. I consent to TN Legal Services Ltd. contacting me regarding my request and have read the <a href="privacy.html" style="color: var(--pure-white); text-decoration: underline;">Privacy Policy</a> and <a href="disclaimer.html" style="color: var(--pure-white); text-decoration: underline;">Professional Disclaimer</a>. *
+              </label>
+            </div>
+
+            <button type="submit" class="form-submit">Submit Notary Request</button>
+          </form>
+
+          <div class="success-message" id="successMessage">
+            <h3>Request Submitted Successfully!</h3>
+            <p>Thank you for your notary request. We have received your documents and information. Our team will review your submission and contact you within 24 hours to confirm your appointment details.</p>
+            <p style="margin-top: 1rem;"><a href="index.html" style="color: var(--pure-white); text-decoration: underline;">Return to Home</a></p>
+          </div>
+        </div>
+
+        <div class="contact-card" style="margin-top: 2rem; background: rgba(255,255,255,0.01);">
+          <h3 style="font-family: 'Cinzel', 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1rem;">Fast Electronic Service</h3>
+          <ul class="list-check" style="list-style: none; padding: 0;">
+            <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+              <strong style="color: var(--pure-white);">Step 1:</strong> <span style="color: var(--silver);">Upload your documents and submit request</span>
+            </li>
+            <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+              <strong style="color: var(--pure-white);">Step 2:</strong> <span style="color: var(--silver);">Receive payment link and pay securely online</span>
+            </li>
+            <li style="padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+              <strong style="color: var(--pure-white);">Step 3:</strong> <span style="color: var(--silver);">Quick virtual appointment for signature verification</span>
+            </li>
+            <li style="padding: 0.75rem 0;">
+              <strong style="color: var(--pure-white);">Step 4:</strong> <span style="color: var(--silver);">Notarized documents delivered electronically within hours</span>
+            </li>
+          </ul>
+          <p style="margin-top: 1.5rem; color: var(--silver); font-size: 0.9rem;">
+            <strong>Need same-day service?</strong> Note your deadline in the form or call <a href="tel:+16136638529" style="color: var(--pure-white); text-decoration: none;">613-663-TLAW (8529)</a> for immediate assistance.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="footer-brand-name">TN Legal Services Ltd.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TN Legal Services Ltd. All Rights Reserved. | <a href="disclaimer.html" style="color: var(--silver); text-decoration: none;">Professional Disclaimer</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+
+  <script>
+    // Client-side file size validation
+    document.getElementById('documents').addEventListener('change', function(e) {
+      const files = e.target.files;
+      let totalSize = 0;
+      const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+
+      for (let i = 0; i < files.length; i++) {
+        totalSize += files[i].size;
+      }
+
+      if (totalSize > maxSize) {
+        alert('Total file size exceeds 10MB. Please reduce the number of files or compress them before uploading.');
+        e.target.value = ''; // Clear the file input
+      }
+    });
+
+    // Handle form submission
+    document.getElementById('notary-request-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const submitButton = form.querySelector('.form-submit');
+      const originalButtonText = submitButton.textContent;
+
+      // Disable submit button and show loading state
+      submitButton.disabled = true;
+      submitButton.textContent = 'Uploading...';
+
+      try {
+        // Create FormData object
+        const formData = new FormData(form);
+
+        // Submit to serverless function
+        const response = await fetch('/.netlify/functions/notary-request', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          // Hide form and show success message
+          form.style.display = 'none';
+          document.getElementById('successMessage').style.display = 'block';
+          document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // Show error message
+          throw new Error(result.error || 'Failed to submit form');
+        }
+      } catch (error) {
+        console.error('Form submission error:', error);
+        alert('There was an error submitting your form. Please try again or contact us directly at 613-663-TLAW (8529).');
+
+        // Re-enable submit button
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
+    });
+  </script>
+
+  <!-- Calendly badge widget begin -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <script type="text/javascript">window.addEventListener('load', function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/admin-tnlegal/30min', text: 'Book a Free Consultation', color: '#ffffff', textColor: '#000000', branding: false,
+        pageSettings: {
+          hideEventTypeDetails: false,
+          hideLandingPageDetails: false
+        },
+        displaySettings: {
+          layout: 'floating',
+          position: 'bottom-center'
+        }
+      });
+    });</script>
+  <!-- Calendly badge widget end -->
+</body>
+</html>

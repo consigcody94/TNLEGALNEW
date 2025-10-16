@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:tnlegal.ca)",
+      "Bash(find:*)",
+      "Bash(for file in services.html about.html online-services.html contact.html)",
+      "Bash(do sed -i '/<img src=\"\"logo\\.png\"\" alt=\"\"TN Legal Services\"\" class=\"\"logo\"\">/{ N; s|<img src=\"\"logo\\.png\"\" alt=\"\"TN Legal Services\"\" class=\"\"logo\"\">\\n        <span class=\"\"logo-text\"\">TN LEGAL SERVICES</span>|<img src=\"\"logo.png\"\" alt=\"\"TN Legal Services\"\" class=\"\"logo\"\">| }' \"$file\")",
+      "Bash(done)",
+      "Bash(for file in /home/lilith/tnlegal/{services,about,online-services,contact}.html)",
+      "Bash(do sed -i 's/background: rgba(0, 0, 0, 0.7);/background: rgba(0, 0, 0, 0.5);/' \"$file\" sed -i 's/z-index: -1;/z-index: 0;/' \"$file\")",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(for file in about services online-services contact)",
+      "Bash(do)",
+      "WebFetch(domain:www.lexisnexis.com)",
+      "Bash(cat:*)",
+      "Bash(for file in services.html about.html online-services.html contact.html news.html article.html)",
+      "Bash(do sed -i 's|family=Bebas+Neue&family=Libre+Baskerville|family=Bebas+Neue\\&family=Cinzel:wght@400;500;600;700;800;900\\&family=Libre+Baskerville|g' \"$file\")",
+      "WebFetch(domain:www.canada.ca)",
+      "WebFetch(domain:www.ontario.ca)",
+      "WebFetch(domain:ised-isde.canada.ca)",
+      "WebSearch",
+      "Bash(awk:*)",
+      "Bash(kill:*)",
+      "Read(//tmp/**)",
+      "Bash(curl:*)",
+      "Bash(xargs kill:*)",
+      "Bash(python3:*)",
+      "Read(//home/lilith/.config/superpowers/skills/skills/collaboration/brainstorming/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

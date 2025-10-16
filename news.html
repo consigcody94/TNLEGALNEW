@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>News & Insights — TN Legal Services Ltd.</title>
+  <meta name="description" content="Legal insights, updates, and news from TN Legal Services. Expert analysis on family law, corporate matters, real estate, and more." />
+  <meta name="theme-color" content="#000000" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://tnlegal.ca/news.html" />
+  <meta property="og:title" content="Latest Legal Updates — TN Legal Services Ltd." />
+  <meta property="og:description" content="Stay informed about important changes in Canadian law, regulations, and legal procedures affecting you." />
+  <meta property="og:image" content="https://tnlegal.ca/logo.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://tnlegal.ca/news.html" />
+  <meta property="twitter:title" content="Latest Legal Updates — TN Legal Services Ltd." />
+  <meta property="twitter:description" content="Stay informed about important changes in Canadian law, regulations, and legal procedures affecting you." />
+  <meta property="twitter:image" content="https://tnlegal.ca/logo.png" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://tnlegal.ca/news.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/navigation.css" />
+  <link rel="stylesheet" href="css/site.css" />
+  <link rel="stylesheet" href="css/news-premium.css" />
+</head>
+<body>
+  <header id="header">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="TN Legal Services" />
+        <span class="nav-logo-text">TN LEGAL SERVICES</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="news.html" class="nav-link">News</a></li>
+        <li class="nav-item"><a href="online-services.html" class="nav-link">Online Services</a></li>
+        <li class="nav-item"><a href="notary-request.html" class="nav-link">Notary Request</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container page-hero__shell">
+        <span class="page-hero__eyebrow">Legal Updates & Changes</span>
+        <h1 class="page-hero__title">Latest Legal <span class="accent-text">Updates</span></h1>
+        <p class="page-hero__lead">
+          Stay informed about important changes in Canadian law, regulations, and legal procedures affecting you.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <!-- Advanced Statistics Panel -->
+        <div class="news-stats" id="newsStats">
+          <div class="news-stat">
+            <span class="news-stat__value">—</span>
+            <span class="news-stat__label">Loading...</span>
+          </div>
+        </div>
+
+        <!-- Advanced Search & Controls -->
+        <div class="news-controls">
+          <div class="search-bar-wrapper">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input
+              type="text"
+              id="newsSearch"
+              class="news-search"
+              placeholder="Search articles by title, content, source, or category..."
+              aria-label="Search articles"
+            />
+          </div>
+
+          <div class="controls-row">
+            <!-- Category Filter -->
+            <div class="news-filter">
+              <button class="filter-btn active" data-category="all">All Updates</button>
+              <button class="filter-btn" data-category="Immigration">Immigration</button>
+              <button class="filter-btn" data-category="Family Law">Family Law</button>
+              <button class="filter-btn" data-category="Real Estate">Real Estate</button>
+              <button class="filter-btn" data-category="Corporate Law">Corporate Law</button>
+              <button class="filter-btn" data-category="Intellectual Property">IP Law</button>
+              <button class="filter-btn" data-category="Litigation">Litigation</button>
+            </div>
+
+            <!-- View Controls -->
+            <div style="display: flex; gap: 1rem; align-items: center;">
+              <!-- Sort Dropdown -->
+              <select id="newsSort" class="sort-select" aria-label="Sort articles">
+                <option value="date-desc">Newest First</option>
+                <option value="date-asc">Oldest First</option>
+                <option value="title-asc">Title A-Z</option>
+                <option value="title-desc">Title Z-A</option>
+                <option value="category">By Category</option>
+              </select>
+
+              <!-- View Toggle -->
+              <div class="view-toggle">
+                <button class="view-toggle-btn active" data-view="grid" aria-label="Grid view">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                  </svg>
+                </button>
+                <button class="view-toggle-btn" data-view="list" aria-label="List view">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="8" y1="6" x2="21" y2="6"></line>
+                    <line x1="8" y1="12" x2="21" y2="12"></line>
+                    <line x1="8" y1="18" x2="21" y2="18"></line>
+                    <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                    <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                    <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Articles Grid - populated by JavaScript -->
+        <div class="news-grid" id="newsGrid">
+          <!-- Loading state -->
+          <div class="loading-state">
+            <div class="loading-shimmer" style="height: 300px; border-radius: 16px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="footer-brand-name">TN Legal Services Ltd.</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TN Legal Services Ltd. All Rights Reserved. | <a href="disclaimer.html" style="color: var(--silver); text-decoration: none;">Professional Disclaimer</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+  <script src="js/news-engine.js"></script>
+<!-- Calendly badge widget begin -->
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<script type="text/javascript">window.addEventListener('load', function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/admin-tnlegal/30min', text: 'Book a Free Consultation', color: '#ffffff', textColor: '#000000', branding: false,
+        pageSettings: {
+          hideEventTypeDetails: false,
+          hideLandingPageDetails: false
+        },
+        displaySettings: {
+          layout: 'floating',
+          position: 'bottom-center'
+        }
+      });
+    });</script>
+<!-- Calendly badge widget end -->
+</body>
+</html>

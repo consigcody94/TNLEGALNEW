@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Professional Disclaimer — TN Legal Services Ltd.</title>
+  <meta name="description" content="Important legal disclaimer and limitations regarding information provided on the TN Legal Services website." />
+  <meta name="theme-color" content="#000000" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Advanced Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/navigation.css" />
+
+  <style>
+    :root {
+      --pure-black: #000000;
+      --pure-white: #ffffff;
+      --silver: #c0c0c0;
+      --platinum: #e5e4e2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cormorant Garamond', 'Playfair Display', 'Times New Roman', serif;
+      background: var(--pure-black);
+      color: var(--pure-white);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      background-image: url('background.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      opacity: 0.15;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .page-hero {
+      padding: 140px 0 60px;
+      text-align: center;
+    }
+
+    .page-hero__title {
+      font-family: 'Cinzel', 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .page-hero__lead {
+      color: var(--silver);
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .legal-content {
+      padding: 60px 0 80px;
+    }
+
+    .legal-section {
+      margin-bottom: 3rem;
+    }
+
+    .legal-section h2 {
+      font-family: 'Cinzel', 'Playfair Display', serif;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+    }
+
+    .legal-section h3 {
+      font-family: 'Cinzel', 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--platinum);
+    }
+
+    .legal-section p {
+      color: var(--silver);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .legal-section ul {
+      color: var(--silver);
+      font-size: 1.05rem;
+      margin: 1rem 0 1rem 2rem;
+      line-height: 1.8;
+    }
+
+    .legal-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .legal-section strong {
+      color: var(--pure-white);
+    }
+
+    .notice-box {
+      background: rgba(255, 215, 0, 0.08);
+      border-left: 4px solid #FFD700;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 4px;
+    }
+
+    .notice-box strong {
+      color: #FFD700;
+      font-size: 1.15rem;
+    }
+
+    .last-updated {
+      background: rgba(255,255,255,0.05);
+      border-left: 3px solid var(--silver);
+      padding: 1rem 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      color: var(--platinum);
+    }
+
+    footer {
+      padding: 3rem 0 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.5);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 2px;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+
+    .footer-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--silver);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--pure-white);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      color: var(--silver);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header id="header">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="logo.png" alt="TN Legal Services">
+        <span class="nav-logo-text">TN LEGAL SERVICES</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="news.html" class="nav-link">News</a></li>
+        <li class="nav-item"><a href="online-services.html" class="nav-link">Online Services</a></li>
+        <li class="nav-item"><a href="notary-request.html" class="nav-link">Notary Request</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-cta">Contact Us</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="page-hero__title">Professional Disclaimer</h1>
+      <p class="page-hero__lead">Important information about the use of this website and its content</p>
+    </div>
+  </section>
+
+  <!-- Legal Content -->
+  <section class="legal-content">
+    <div class="container">
+      <div class="last-updated">
+        <strong>Last Updated:</strong> October 10, 2025
+      </div>
+
+      <div class="notice-box">
+        <strong>IMPORTANT NOTICE</strong>
+        <p style="margin-top: 0.5rem; color: var(--platinum);">The information on this website is for general informational purposes only and does not constitute legal advice. Reading this website or contacting us does not create a lawyer-client relationship. Do not act or rely on any information on this website without seeking professional legal counsel.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>No Lawyer-Client Relationship</h2>
+        <p>Use of this website, submission of a contact form, or any communication with TN Legal Services Ltd. through this website <strong>does not create a lawyer-client relationship</strong>. A lawyer-client relationship is established only through:</p>
+        <ul>
+          <li>A formal written retainer agreement signed by both parties</li>
+          <li>Explicit confirmation from our firm that we are accepting you as a client</li>
+          <li>Payment of a retainer fee (where applicable)</li>
+        </ul>
+        <p>Until a lawyer-client relationship is formally established, any information you provide to us is not protected by solicitor-client privilege.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Not Legal Advice</h2>
+        <p>The content on this website, including articles, news summaries, blog posts, and other materials:</p>
+        <ul>
+          <li>Is for <strong>general informational purposes only</strong></li>
+          <li>Is not intended to be, and should not be construed as, legal advice</li>
+          <li>May not reflect the most current legal developments</li>
+          <li>Does not address specific circumstances of any particular individual or entity</li>
+          <li>Should not be relied upon as a substitute for professional legal counsel</li>
+        </ul>
+        <p><strong>Do not act or refrain from acting based on information on this website without obtaining professional legal advice specific to your situation.</strong></p>
+      </div>
+
+      <div class="legal-section">
+        <h2>No Guarantees or Warranties</h2>
+        <p>TN Legal Services Ltd. makes no representations, warranties, or guarantees regarding:</p>
+        <ul>
+          <li><strong>Accuracy:</strong> Information on this website may contain errors, omissions, or outdated content</li>
+          <li><strong>Completeness:</strong> Website content may not address all aspects of legal topics discussed</li>
+          <li><strong>Results:</strong> Past results do not guarantee future outcomes. Every legal matter is unique</li>
+          <li><strong>Timeliness:</strong> Laws and regulations change frequently; information may become outdated</li>
+          <li><strong>Availability:</strong> Website may experience downtime or technical issues</li>
+        </ul>
+        <p>We expressly disclaim all warranties, express or implied, including warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Limitation of Liability</h2>
+        <p>To the fullest extent permitted by law, TN Legal Services Ltd., its lawyers, paralegals, employees, and agents shall not be liable for:</p>
+        <ul>
+          <li>Any direct, indirect, incidental, consequential, or punitive damages</li>
+          <li>Loss of profits, revenue, data, or business opportunities</li>
+          <li>Damages arising from reliance on information on this website</li>
+          <li>Damages resulting from errors, omissions, or inaccuracies in website content</li>
+          <li>Technical failures, viruses, or unauthorized access to your device</li>
+        </ul>
+        <p>This limitation applies even if we have been advised of the possibility of such damages.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Jurisdictional Limitations</h2>
+        <p>TN Legal Services Ltd. is a law firm licensed to practice in <strong>Ontario, Canada</strong>. Our lawyers and paralegals are licensed by the Law Society of Ontario.</p>
+        <p><strong>We do not provide legal services outside Ontario unless specifically licensed to do so.</strong> If you are located outside Ontario or require legal services in another jurisdiction, please consult a lawyer licensed in that jurisdiction.</p>
+        <p>Laws vary by province and territory. Information on this website primarily addresses Ontario law and may not apply in other jurisdictions.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Third-Party Content and Links</h2>
+        <p>Our website may contain links to third-party websites, government resources, legal databases, and other external content. We provide these links for convenience only and do not:</p>
+        <ul>
+          <li>Endorse the content, products, or services of linked websites</li>
+          <li>Guarantee the accuracy or reliability of third-party content</li>
+          <li>Assume responsibility for third-party privacy practices</li>
+          <li>Control or monitor changes to third-party websites</li>
+        </ul>
+        <p>Access to third-party websites is at your own risk. We encourage you to review the terms and privacy policies of any external sites you visit.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>News and Legal Updates</h2>
+        <p>Legal news articles and updates on this website are summaries of publicly available information from official sources. These summaries:</p>
+        <ul>
+          <li>Are for informational purposes and general awareness</li>
+          <li>Do not constitute legal advice or professional recommendations</li>
+          <li>May not capture all nuances or details of legal changes</li>
+          <li>Should be verified with primary sources before relying on them</li>
+        </ul>
+        <p>We credit official sources (e.g., government agencies, regulatory bodies) and provide links where possible. We do not claim authorship of government-published information.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Confidentiality of Unsolicited Information</h2>
+        <p><strong>Do not send confidential information to us through this website or email until a lawyer-client relationship has been established.</strong></p>
+        <p>Information sent through contact forms, email, or other unsolicited communications:</p>
+        <ul>
+          <li>Is <strong>not confidential</strong></li>
+          <li>Is <strong>not protected by solicitor-client privilege</strong></li>
+          <li>May be disclosed if legally required</li>
+          <li>Does not obligate us to represent you or maintain confidentiality</li>
+        </ul>
+        <p>We reserve the right to decline representation for any reason, including conflicts of interest.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Conflicts of Interest</h2>
+        <p>Before accepting any new client, we conduct a conflicts check in accordance with Law Society of Ontario rules. We may decline representation if:</p>
+        <ul>
+          <li>We represent an opposing party in the same or a related matter</li>
+          <li>There is a conflict with a former or current client</li>
+          <li>Representation would create a professional conflict</li>
+          <li>We do not have expertise in the required area of law</li>
+        </ul>
+        <p>Submitting information through this website does not prevent us from representing other parties, including those with adverse interests to yours, unless a lawyer-client relationship has been formally established.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Professional Regulation</h2>
+        <p>TN Legal Services Ltd. and its lawyers and paralegals are regulated by the <strong>Law Society of Ontario (LSO)</strong>.</p>
+        <p>If you have concerns about our professional conduct, you may contact:</p>
+        <p style="margin-top: 1rem; margin-left: 1.5rem;">
+          <strong>Law Society of Ontario</strong><br>
+          Osgoode Hall<br>
+          130 Queen Street West<br>
+          Toronto, ON M5H 2N6<br>
+          <br>
+          Phone: 416-947-3300 or 1-800-668-7380<br>
+          Website: <a href="https://lso.ca" target="_blank" rel="noopener" style="color: var(--pure-white);">lso.ca</a>
+        </p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Copyright and Intellectual Property</h2>
+        <p>Unless otherwise indicated, all content on this website (including text, graphics, logos, images, and software) is the property of TN Legal Services Ltd. and is protected by Canadian and international copyright laws.</p>
+        <p>You may view and print content for personal, non-commercial use only. You may not:</p>
+        <ul>
+          <li>Reproduce, distribute, or publicly display website content without permission</li>
+          <li>Modify or create derivative works from website content</li>
+          <li>Use content for commercial purposes without a license</li>
+          <li>Remove copyright notices or proprietary markings</li>
+        </ul>
+        <p>Government-published content (e.g., statutes, regulations, court decisions) remains the property of the Crown and is subject to Crown copyright provisions.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Changes to This Disclaimer</h2>
+        <p>We reserve the right to modify this disclaimer at any time without prior notice. Changes will be posted on this page with an updated "Last Updated" date.</p>
+        <p>Your continued use of this website after changes constitutes acceptance of the modified disclaimer.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Governing Law</h2>
+        <p>This disclaimer and your use of this website are governed by the laws of the Province of Ontario and the federal laws of Canada applicable therein.</p>
+        <p>Any disputes arising from your use of this website shall be subject to the exclusive jurisdiction of the courts of Ontario.</p>
+      </div>
+
+      <div class="legal-section">
+        <h2>Contact Us for Legal Advice</h2>
+        <p>If you require legal advice or representation, please contact us to schedule a consultation. During the consultation, we will:</p>
+        <ul>
+          <li>Discuss your specific legal matter</li>
+          <li>Explain our services and fee structure</li>
+          <li>Conduct a conflicts check</li>
+          <li>Determine if we can assist you</li>
+          <li>Provide a retainer agreement if we agree to represent you</li>
+        </ul>
+        <p style="margin-top: 1.5rem;">
+          <strong>TN Legal Services Ltd.</strong><br>
+          665 River Road, Suite 105<br>
+          Gloucester, ON K1V 2G2<br>
+          <br>
+          Phone: <a href="tel:+16136638529" style="color: var(--pure-white);">613-663-TLAW (8529)</a><br>
+          Email: <a href="mailto:admin@tnlegal.ca" style="color: var(--pure-white);">admin@tnlegal.ca</a><br>
+          <br>
+          <a href="https://calendly.com/admin-tnlegal/30min" target="_blank" rel="noopener" style="color: var(--pure-white); text-decoration: underline;">Schedule a Consultation →</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">TN Legal Services Ltd.</div>
+        <ul class="footer-links">
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+          <li><a href="disclaimer.html">Disclaimer</a></li>
+        </ul>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 TN Legal Services Ltd. All Rights Reserved. | <a href="disclaimer.html" style="color: var(--silver);">Professional Disclaimer</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/site.js"></script>
+</body>
+</html>

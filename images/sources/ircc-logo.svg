@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" fill="none">
+  <!-- IRCC Logo -->
+  <rect width="400" height="120" fill="white"/>
+
+  <!-- Maple Leaf -->
+  <g transform="translate(25, 25)">
+    <path d="M 35 10 L 30 25 L 35 25 L 32 35 L 38 38 L 35 50 L 42 48 L 35 60 L 28 48 L 35 50 L 32 38 L 38 35 L 35 25 L 40 25 Z" fill="#FF0000"/>
+  </g>
+
+  <!-- Text -->
+  <text x="90" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Immigration, Refugees and</text>
+  <text x="90" y="65" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000000">Citizenship Canada</text>
+  <text x="90" y="85" font-family="Arial, sans-serif" font-size="14" fill="#666666">IRCC</text>
+</svg>

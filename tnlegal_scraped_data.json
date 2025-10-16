@@ -1,0 +1,136 @@
+{
+  "website": "https://tnlegal.ca",
+  "company_name": "TN Legal Services Ltd.",
+  "location": {
+    "address": "665 River Road, Suite 105",
+    "city": "Gloucester",
+    "province": "ON",
+    "postal_code": "K1V 2G2",
+    "country": "Canada"
+  },
+  "contact": {
+    "phone": "613-663-TLAW (8529)",
+    "phone_numeric": "613-663-8529",
+    "email": "admin@tnlegal.ca"
+  },
+  "social_media": {
+    "facebook": true,
+    "instagram": true,
+    "twitter": true
+  },
+  "navigation": [
+    "Home",
+    "About",
+    "Services",
+    "Testimonials",
+    "Online Services",
+    "Contact",
+    "My Cart"
+  ],
+  "about": {
+    "tagline": "Trusted Legal Partner in Ontario",
+    "value_proposition": "Trust our skilled lawyers and paralegals to handle your legal needs with expertise and achieve the best outcome for your case.",
+    "service_areas": [
+      "Family Law",
+      "Corporate Law",
+      "Criminal Law",
+      "Tribunal Matters",
+      "Intellectual Property Law"
+    ],
+    "team": [
+      {
+        "name": "Thi Nguyen",
+        "role": "Paralegal",
+        "expertise": "Tribunal matters, Corporate, Real Estate, and Family Law"
+      },
+      {
+        "name": "Emily Smith",
+        "role": "Real Estate Lawyer",
+        "expertise": "Corporate law and business transactions"
+      },
+      {
+        "name": "Michael Williams",
+        "role": "Intellectual Property Lawyer",
+        "expertise": "Protecting and enforcing intellectual property rights"
+      },
+      {
+        "name": "Jessica Brown",
+        "role": "Litigation Lawyer",
+        "expertise": "Fighting for client rights and compensation"
+      }
+    ]
+  },
+  "services": [
+    {
+      "name": "Family Law Services",
+      "description": "Compassionate family law legal professionals",
+      "includes": ["divorce", "custody", "adoption"]
+    },
+    {
+      "name": "Real Estate Law",
+      "description": "Expert lawyers to help with your home purchase",
+      "includes": ["home purchases", "selling", "closing"]
+    },
+    {
+      "name": "Corporate Law",
+      "description": "Protecting and positioning businesses for success",
+      "includes": ["business services"]
+    },
+    {
+      "name": "Intellectual Property Rights",
+      "description": "Protect your valuable ideas and innovations",
+      "includes": ["IP protection"]
+    },
+    {
+      "name": "Litigation Services",
+      "description": "Assess matter, possible outcomes, strategic options",
+      "includes": ["Small Claims Court", "Administrative Law"]
+    },
+    {
+      "name": "Provincial Offences",
+      "description": "Legal assistance for provincial offense matters",
+      "includes": []
+    },
+    {
+      "name": "Notary Services",
+      "description": "Document notarization and Commissioner of Oaths",
+      "includes": ["document notarization", "Commissioner of Oaths"]
+    }
+  ],
+  "online_products": [
+    {
+      "name": "Incorporate a New Business",
+      "price": 599.00,
+      "currency": "CAD",
+      "image_description": "Government of Ontario document"
+    },
+    {
+      "name": "Standard Notary Services",
+      "price": 20.00,
+      "currency": "CAD",
+      "image_description": "Gold Seal"
+    },
+    {
+      "name": "Certified True Copy",
+      "price": 25.00,
+      "currency": "CAD",
+      "image_description": "Gold Seal"
+    },
+    {
+      "name": "Business Notary Services",
+      "price": 25.00,
+      "currency": "CAD",
+      "image_description": "Gold Seal"
+    }
+  ],
+  "testimonials": {
+    "status": "No testimonials currently published",
+    "placeholder_message": "Client Testimonials: Hear from our satisfied clients"
+  },
+  "platform": {
+    "cms": "WordPress",
+    "ecommerce": "WooCommerce",
+    "theme": "Twenty Twenty-Four"
+  },
+  "scraped_date": "2025-10-08"
+}
