@@ -1,0 +1,90 @@
+Google Drive OAuth Setup Checklist
+=================================
+
+Use this checklist to configure Google OAuth so the Netlify notary function can upload files into your personal Google Drive. Complete each step in order; anything marked (user) is something you need to do in the Google Cloud Console or browser. Once everything is ready, redeploy on Netlify.
+
+1. Enable APIs (user)
+   - Sign in at https://console.cloud.google.com/ with the Google account that owns your Drive.
+   - Make sure the project selector (top-left) shows "ageless-earth-421919".
+   - Go to APIs & Services → Library.
+   - Search for "Google Drive API" and click Enable. If the button says Disable, it is already active.
+
+2. Configure the OAuth consent screen (user)
+   - Still under APIs & Services, open "OAuth consent screen".
+   - App type: External. App name can be anything (e.g., "TN Legal Notary Upload").
+   - Add your email as both user support and developer contact.
+   - Scopes: add `https://www.googleapis.com/auth/drive.file`.
+   - Test users: add the same Google account you are signing in with.
+   - Save the consent screen.
+
+3. Create OAuth client credentials (user)
+   - APIs & Services → Credentials → Create Credentials → OAuth client ID.
+   - Application type: Web application (name it however you like).
+   - Authorized redirect URIs: add `https://developers.google.com/oauthplayground` (or any URI you plan to use to obtain the refresh token).
+   - Save the client. Copy the generated Client ID and Client Secret; you will need both for Netlify.
+
+4. Obtain a refresh token (user)
+   - Option A – OAuth Playground:
+     1. Visit https://developers.google.com/oauthplayground.
+     2. Click the gear icon, check "Use your own OAuth credentials", and paste the Client ID and Client Secret you just created.
+     3. In Step 1, find and authorize the scope `https://www.googleapis.com/auth/drive.file`.
+     4. Proceed to Step 2, click "Exchange authorization code for tokens".
+     5. Copy the Refresh Token that appears.
+   - Option B – Local Node script (run from the project root):
+     ```bash
+     node - <<'JS'
+     const readline = require('readline');
+     const { google } = require('googleapis');
+
+     const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;
+     const clientSecret = process.env.GOOGLE_OAUTH_CLIENT_SECRET;
+     const redirectUri = process.env.GOOGLE_OAUTH_REDIRECT_URI || 'https://developers.google.com/oauthplayground';
+
+     const oauth2Client = new google.auth.OAuth2(clientId, clientSecret, redirectUri);
+     const authUrl = oauth2Client.generateAuthUrl({
+       access_type: 'offline',
+       scope: ['https://www.googleapis.com/auth/drive.file'],
+       prompt: 'consent',
+     });
+
+     console.log('\nAuthorize this app by visiting:\n', authUrl);
+
+     const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+     rl.question('\nEnter the code here: ', async (code) => {
+       try {
+         const { tokens } = await oauth2Client.getToken(code.trim());
+         console.log('\nRefresh token:', tokens.refresh_token);
+       } catch (err) {
+         console.error('Failed to retrieve tokens', err);
+       } finally {
+         rl.close();
+       }
+     });
+     JS
+     ```
+     - Follow the printed URL, sign in, approve access, and paste the returned code so the script prints the refresh token.
+
+5. Update Netlify environment variables
+   - In Netlify → Site configuration → Environment variables → Add variables:
+     * `GOOGLE_OAUTH_CLIENT_ID` – paste the client ID.
+     * `GOOGLE_OAUTH_CLIENT_SECRET` – paste the client secret.
+     * `GOOGLE_OAUTH_REFRESH_TOKEN` – paste the refresh token from Step 4.
+     * `GOOGLE_OAUTH_REDIRECT_URI` – optional; set it if you used something other than the OAuth Playground.
+     * Keep `GOOGLE_DRIVE_FOLDER_ID` pointing to your destination folder ID.
+     * Remove `GOOGLE_SERVICE_ACCOUNT_JSON`, `GOOGLE_CLIENT_EMAIL`, and `GOOGLE_PRIVATE_KEY` if they are still present (not needed anymore).
+
+6. Redeploy Netlify
+   - Trigger a new deploy (a regular "Deploy site" is enough) so the function picks up the new variables.
+
+7. Test the notary form
+   - Submit a test request with a small file.
+   - Confirm the response is 200 OK and the file appears in the target Google Drive folder.
+   - If email delivery is managed by Netlify Forms, check that the notification arrives; otherwise ensure SMTP credentials are configured and working.
+
+8. Troubleshooting checklist
+   - 403 errors mentioning storage quota: verify you are authenticating as your personal account via OAuth (not a service account) and that the refresh token belongs to the right user.
+   - 401 invalid client: double-check the client ID/secret in Netlify.
+   - 400 redirect_uri mismatch: make sure the redirect URI used to obtain the refresh token matches the one saved in Google Cloud *and* in Netlify.
+   - Missing `drive.file` permissions: revisit the consent screen and ensure the scope was authorized during refresh token generation.
+
+After everything succeeds, files uploaded from the website will go directly into your personal Drive folder, using your own storage quota. If you later upgrade to Google Workspace and want to use a Shared Drive, simply change `GOOGLE_DRIVE_FOLDER_ID` to a folder inside the Shared Drive—the function already sets `supportsAllDrives: true`.

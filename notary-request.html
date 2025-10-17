@@ -171,6 +171,7 @@
             id="notary-request-form"
             name="notary-request"
             method="POST"
+            data-netlify="true"
             enctype="multipart/form-data"
           >
             <!-- Honeypot field for spam protection -->
@@ -340,47 +341,34 @@
       }
     });
 
-    // Handle form submission
-    document.getElementById('notary-request-form').addEventListener('submit', async function(e) {
+    // Handle form submission with Netlify
+    const form = document.getElementById('notary-request-form');
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const form = e.target;
+      const formData = new FormData(form);
       const submitButton = form.querySelector('.form-submit');
       const originalButtonText = submitButton.textContent;
 
-      // Disable submit button and show loading state
       submitButton.disabled = true;
-      submitButton.textContent = 'Uploading...';
+      submitButton.textContent = 'Submitting...';
 
-      try {
-        // Create FormData object
-        const formData = new FormData(form);
-
-        // Submit to serverless function
-        const response = await fetch('/.netlify/functions/notary-request', {
-          method: 'POST',
-          body: formData,
-        });
-
-        const result = await response.json();
-
-        if (response.ok && result.success) {
-          // Hide form and show success message
+      fetch('/', {
+        method: 'POST',
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      })
+        .then(() => {
           form.style.display = 'none';
           document.getElementById('successMessage').style.display = 'block';
           document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-          // Show error message
-          throw new Error(result.error || 'Failed to submit form');
-        }
-      } catch (error) {
-        console.error('Form submission error:', error);
-        alert('There was an error submitting your form. Please try again or contact us directly at 613-663-TLAW (8529).');
-
-        // Re-enable submit button
-        submitButton.disabled = false;
-        submitButton.textContent = originalButtonText;
-      }
+        })
+        .catch((error) => {
+          console.error('Form submission error:', error);
+          alert('There was an error submitting your form. Please try again or contact us directly.');
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+        });
     });
   </script>
 
