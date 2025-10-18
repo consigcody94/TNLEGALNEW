@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="css/site.css" />
 </head>
 <body>
-  <header id="header">
+        <header id="header">
     <div class="nav-container">
       <a href="index.html" class="nav-logo">
         <img src="logo.png" alt="TN Legal Services" />
@@ -48,14 +48,14 @@
       <ul class="nav-menu" id="navMenu">
         <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
         <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-        <li class="nav-item"><a href="services.html" class="nav-link">Services</a></li>
+        <li class="nav-item"><a href="services.html" class="nav-link active">Services</a></li>
         <li class="nav-item"><a href="news.html" class="nav-link">News</a></li>
-        <li class="nav-item"><a href="online-services.html" class="nav-link">Online Services</a></li>
-        <li class="nav-item"><a href="notary-request.html" class="nav-link">Notary Request</a></li>
+        <li class="nav-item"><a href="services-request.html" class="nav-link">Request Service</a></li>
         <li class="nav-item"><a href="contact.html" class="nav-cta">Contact Us</a></li>
       </ul>
     </div>
   </header>
+
 
   <main>
     <section class="page-hero">
@@ -137,14 +137,14 @@
           </article>
           <article class="card">
             <div class="card__meta">Documentation</div>
-            <h3 class="card__title">Notary & Online Services</h3>
+            <h3 class="card__title">Commissioner & Document Services</h3>
             <p class="card__body">Convenient digital notarizations, remote commissioning, and document certification.</p>
             <div class="badge-list">
-              <span>Notary</span>
+              <span>Affidavits</span>
               <span>Commissioner</span>
               <span>Virtual Signing</span>
             </div>
-            <p style="margin-top:1.4rem;"><a href="online-services.html" class="service-link">Book online →</a></p>
+            <p style="margin-top:1.4rem;"><a href="#document-services" class="service-link">View packages →</a></p>
           </article>
         </div>
       </div>
@@ -157,13 +157,15 @@
             <span class="section-heading__eyebrow">Family Law</span>
             <h2 class="section-heading__title">Protecting households with pragmatic next steps</h2>
           </div>
-          <div class="service-summary">
-            <p>We support families navigating life transitions with actionable plans and clear fee expectations from the outset.</p>
-            <ul class="list-check">
-              <li>Parenting time, decision-making responsibility, and child support</li>
-              <li>Negotiation and drafting of separation and cohabitation agreements</li>
-              <li>Representation in motions, conferences, and mediations</li>
-            </ul>
+          <div class="readable-container">
+            <div class="service-summary">
+              <p>We support families navigating life transitions with actionable plans and clear fee expectations from the outset.</p>
+              <ul class="list-check">
+                <li>Parenting time, decision-making responsibility, and child support</li>
+                <li>Negotiation and drafting of separation and cohabitation agreements</li>
+                <li>Representation in motions, conferences, and mediations</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="media-frame">
@@ -182,13 +184,15 @@
             <span class="section-heading__eyebrow">Corporate & Commercial</span>
             <h2 class="section-heading__title">Structure, compliance, and contract execution</h2>
           </div>
-          <div class="service-summary">
-            <p>Our lawyers and paralegals combine governance insight with hands-on filings to keep your business moving.</p>
-            <ul class="list-check">
-              <li>New incorporations, continuances, and minute book updates</li>
-              <li>Shareholder, employment, and vendor agreements</li>
-              <li>Regulatory compliance and policy frameworks</li>
-            </ul>
+          <div class="readable-container">
+            <div class="service-summary">
+              <p>Our lawyers and paralegals combine governance insight with hands-on filings to keep your business moving.</p>
+              <ul class="list-check">
+                <li>New incorporations, continuances, and minute book updates</li>
+                <li>Shareholder, employment, and vendor agreements</li>
+                <li>Regulatory compliance and policy frameworks</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -201,21 +205,23 @@
             <span class="section-heading__eyebrow">Real Estate</span>
             <h2 class="section-heading__title">Closing deals with confidence</h2>
           </div>
-          <div class="service-summary">
-            <p>We coordinate with lenders, realtors, and municipalities so your closing package is complete ahead of schedule.</p>
-            <ul class="list-check">
-              <li>Purchase, sale, and refinance transactions</li>
-              <li>Title searches, insurance, and transfer registration</li>
-              <li>Mortgage payouts, bridge financing, and status certificates</li>
-            </ul>
-            <div class="metric-grid">
-              <div class="metric">
-                <div class="metric__value">3-5 days</div>
-                <div class="metric__label">Average closing prep</div>
-              </div>
-              <div class="metric">
-                <div class="metric__value">24 hrs</div>
-                <div class="metric__label">Document turnaround</div>
+          <div class="readable-container">
+            <div class="service-summary">
+              <p>We coordinate with lenders, realtors, and municipalities so your closing package is complete ahead of schedule.</p>
+              <ul class="list-check">
+                <li>Purchase, sale, and refinance transactions</li>
+                <li>Title searches, insurance, and transfer registration</li>
+                <li>Mortgage payouts, bridge financing, and status certificates</li>
+              </ul>
+              <div class="metric-grid">
+                <div class="metric">
+                  <div class="metric__value">3-5 days</div>
+                  <div class="metric__label">Average closing prep</div>
+                </div>
+                <div class="metric">
+                  <div class="metric__value">24 hrs</div>
+                  <div class="metric__label">Document turnaround</div>
+                </div>
               </div>
             </div>
           </div>
@@ -236,13 +242,15 @@
             <span class="section-heading__eyebrow">Intellectual Property</span>
             <h2 class="section-heading__title">Safeguard and commercialize your ideas</h2>
           </div>
-          <div class="service-summary">
-            <p>We deliver comprehensive IP audits, filings, and enforcement strategies tailored to creatives and innovators.</p>
-            <ul class="list-check">
-              <li>Trademark searches, applications, and maintenance</li>
-              <li>Copyright registrations and licensing agreements</li>
-              <li>Cease-and-desist correspondence and enforcement</li>
-            </ul>
+          <div class="readable-container">
+            <div class="service-summary">
+              <p>We deliver comprehensive IP audits, filings, and enforcement strategies tailored to creatives and innovators.</p>
+              <ul class="list-check">
+                <li>Trademark searches, applications, and maintenance</li>
+                <li>Copyright registrations and licensing agreements</li>
+                <li>Cease-and-desist correspondence and enforcement</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -255,17 +263,114 @@
             <span class="section-heading__eyebrow">Litigation & Provincial Offences</span>
             <h2 class="section-heading__title">Prepared advocacy, inside and outside the courtroom</h2>
           </div>
-          <div class="service-summary">
-            <p>Our litigators and paralegals map realistic outcomes and decisive tactics for disputes, hearings, and negotiations.</p>
-            <ul class="list-check">
-              <li>Small claims and landlord / tenant proceedings</li>
-              <li>Administrative tribunal representation</li>
-              <li>Provincial offence strategy and defence</li>
-            </ul>
+          <div class="readable-container">
+            <div class="service-summary">
+              <p>Our litigators and paralegals map realistic outcomes and decisive tactics for disputes, hearings, and negotiations.</p>
+              <ul class="list-check">
+                <li>Small claims and landlord / tenant proceedings</li>
+                <li>Administrative tribunal representation</li>
+                <li>Provincial offence strategy and defence</li>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="media-frame">
           <img src="Litigation Services.png" alt="Litigation strategy meeting" />
+        </div>
+      </div>
+    </section>
+
+    <section id="document-services">
+      <div class="container split split--reverse">
+        <div class="media-frame">
+          <img src="Notary Services.png" alt="Commissioner and document services" />
+        </div>
+        <div>
+          <div class="section-heading" style="text-align:left; margin:0 0 1.75rem 0;">
+            <span class="section-heading__eyebrow">Commissioner & Document Services</span>
+            <h2 class="section-heading__title">Virtual & mobile support for affidavits and certifications</h2>
+          </div>
+          <div class="readable-container">
+            <div class="service-summary">
+              <p>Book secure remote meetings or request on-site mobile visits for notarizations, affidavits, and statutory declarations — all delivered with the same diligence as our in-office appointments.</p>
+              <ul class="list-check">
+                <li>Virtual sessions with identity verification and digital seals</li>
+                <li>Mobile visits to your home, office, or hospital</li>
+                <li>Same-day turnaround for urgent matters</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-heading__eyebrow">How it Works</span>
+          <h2 class="section-heading__title">Simple, secure steps from booking to delivery</h2>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card__meta">Step 1</div>
+            <h3 class="card__title">Share your documents</h3>
+            <p class="card__body">Upload or email us clear copies of the documents that require notarization or commissioning and let us know your preferred timeframe.</p>
+          </article>
+          <article class="card">
+            <div class="card__meta">Step 2</div>
+            <h3 class="card__title">Meet virtually or in person</h3>
+            <p class="card__body">Connect through our secure video conferencing platform or schedule an in-office / mobile visit. We verify identity and witness signatures in real time.</p>
+          </article>
+          <article class="card">
+            <div class="card__meta">Step 3</div>
+            <h3 class="card__title">Receive finalized paperwork</h3>
+            <p class="card__body">Completed documents are returned digitally within hours and physical originals are prepared for pickup, courier, or mail as required.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="container">
+        <div class="section-heading">
+          <span class="section-heading__eyebrow">Packages</span>
+          <h2 class="section-heading__title">Transparent pricing for remote and in-person services</h2>
+          <p class="section-heading__lead">Need bulk notarizations or corporate commissioning? Contact us for a tailored quote.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="pricing-card">
+            <div class="card__meta">Most Popular</div>
+            <h3 class="card__title">Virtual Session</h3>
+            <p class="pricing-card__price">$45<span>/ first document</span></p>
+            <p class="card__body">Includes identity verification, one notarized signature, and secure digital copies delivered to your inbox within the same business day.</p>
+            <ul class="list-check">
+              <li>$15 for each additional document</li>
+              <li>Available evenings and weekends</li>
+              <li>Ideal for affidavits, statutory declarations, travel consents</li>
+            </ul>
+          </article>
+          <article class="pricing-card">
+            <div class="card__meta">Mobile</div>
+            <h3 class="card__title">On-Site Visit</h3>
+            <p class="pricing-card__price">$95<span>/ Ottawa core</span></p>
+            <p class="card__body">We come to your location — home, hospital, or office — equipped to complete notarizations and commissioning on the spot.</p>
+            <ul class="list-check">
+              <li>Includes travel within Ottawa core</li>
+              <li>Flexible group appointments</li>
+              <li>Mileage quoted for surrounding regions</li>
+            </ul>
+          </article>
+          <article class="pricing-card">
+            <div class="card__meta">Business Ready</div>
+            <h3 class="card__title">Corporate Documents</h3>
+            <p class="pricing-card__price">Custom<span>/ per project</span></p>
+            <p class="card__body">High-volume commissioning for HR, banking, or government filings with secure signing rooms and witness coordination.</p>
+            <ul class="list-check">
+              <li>Bulk notarization workflows</li>
+              <li>Digital signing rooms with audit trails</li>
+              <li>Optional minute-book updates</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
@@ -279,7 +384,7 @@
         </div>
         <div class="page-hero__cta" style="margin-top:0;">
           <a class="btn btn-primary" href="contact.html">Book a Consultation</a>
-          <a class="btn btn-secondary" href="online-services.html">Request Online Service</a>
+          <a class="btn btn-secondary" href="services-request.html">Request Service</a>
         </div>
       </div>
     </section>
