@@ -5,7 +5,8 @@
       "Bash(pkill:*)",
       "Read(//home/lilith/.config/superpowers/skills/skills/collaboration/brainstorming/**)",
       "Bash(kill 2286)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/index.html)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8000/index.html)",
+      "Bash(mkdir -p netlify/functions)"
     ],
     "deny": [],
     "ask": []

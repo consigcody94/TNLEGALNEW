@@ -1175,33 +1175,86 @@
         }
       });
 
-      // Form submission
-      notaryForm.addEventListener('submit', function(e) {
+      // Form submission with Dropbox upload
+      notaryForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        const formData = new FormData(notaryForm);
         const submitButton = notaryForm.querySelector('.form-submit');
         const originalText = submitButton.textContent;
 
         submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
+        submitButton.textContent = 'Uploading files...';
 
-        fetch('/', {
-          method: 'POST',
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(formData).toString(),
-        })
-          .then(() => {
-            notaryForm.style.display = 'none';
-            document.getElementById('notarySuccessMessage').style.display = 'block';
-            document.getElementById('notarySuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
-          })
-          .catch((error) => {
-            console.error('Form submission error:', error);
-            alert('There was an error submitting your form. Please try again or contact us directly.');
-            submitButton.disabled = false;
-            submitButton.textContent = originalText;
+        try {
+          // Get form data
+          const fullName = document.getElementById('full-name').value;
+          const notarizationType = document.getElementById('notarization-type').value;
+          const fileInput = document.getElementById('documents');
+          const files = fileInput.files;
+
+          // Upload files to Dropbox if any files were selected
+          if (files.length > 0) {
+            for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+              submitButton.textContent = `Uploading ${i + 1} of ${files.length}...`;
+
+              // Read file as base64
+              const fileContent = await readFileAsBase64(file);
+
+              // Send to Netlify Function
+              const uploadResponse = await fetch('/.netlify/functions/dropbox-upload', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  fileName: file.name,
+                  fileContent: fileContent,
+                  fullName: fullName,
+                  notarizationType: notarizationType
+                })
+              });
+
+              if (!uploadResponse.ok) {
+                throw new Error(`Failed to upload ${file.name}`);
+              }
+            }
+          }
+
+          // Submit form data to Netlify Forms for email notifications
+          submitButton.textContent = 'Finalizing...';
+          const formData = new FormData(notaryForm);
+
+          await fetch('/', {
+            method: 'POST',
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
           });
+
+          // Show success message
+          notaryForm.style.display = 'none';
+          document.getElementById('notarySuccessMessage').style.display = 'block';
+          document.getElementById('notarySuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        } catch (error) {
+          console.error('Form submission error:', error);
+          alert('There was an error uploading your files. Please try again or contact us directly.');
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        }
       });
+
+      // Helper function to read file as base64
+      function readFileAsBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const base64 = reader.result.split(',')[1]; // Remove data:*/*;base64, prefix
+            resolve(base64);
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
     }
 
     // === Business Registration Flow ===
