@@ -1,30 +1,128 @@
-# Dropbox Integration + Email Notification Setup
+# Dropbox Integration Setup (OAuth Refresh Token)
 
-## ⚠️ IMPORTANT: Secure Your API Token
+## Overview
 
-**NEVER commit your Dropbox API token to Git or include it in your code.**
-
-The token must be added as an **environment variable** in Netlify, not in your code files.
+Dropbox now uses **short-lived access tokens** (4 hours) + **refresh tokens** (never expire) for security. This guide will help you set up long-term access using refresh tokens.
 
 ---
 
-## Step 1: Add Dropbox Token to Netlify
+## Step 1: Create/Configure Your Dropbox App
+
+1. Go to [Dropbox App Console](https://www.dropbox.com/developers/apps)
+2. Click **Create app** (or select your existing app)
+3. Choose:
+   - **Scoped access**
+   - **Full Dropbox** or **App folder** (Full Dropbox recommended)
+   - Give it a name (e.g., "TN Legal File Uploads")
+4. Click **Create app**
+
+---
+
+## Step 2: Configure App Permissions
+
+1. In your app, go to **Permissions** tab
+2. Check these permissions:
+   - ✅ `files.metadata.write`
+   - ✅ `files.metadata.read`
+   - ✅ `files.content.write`
+   - ✅ `files.content.read`
+3. Click **Submit** at the bottom
+
+---
+
+## Step 3: Get Your App Credentials
+
+1. Go to **Settings** tab
+2. Find and copy these values (you'll need them later):
+   - **App key** (also called Client ID)
+   - **App secret** (click "Show" to reveal it)
+
+---
+
+## Step 4: Generate Refresh Token
+
+### Option A: Use Helper Script (Easiest!) ⭐
+
+We've included a helper script to make this super easy:
+
+1. Run this command in your project directory:
+   ```bash
+   node scripts/get-dropbox-refresh-token.js
+   ```
+
+2. Follow the prompts:
+   - Enter your App Key
+   - Enter your App Secret
+   - Open the URL it gives you in your browser
+   - Click "Allow" on Dropbox
+   - Copy the authorization code and paste it back
+
+3. The script will display your refresh token - **copy it!**
+
+### Option B: Manual OAuth Flow (Advanced)
+
+If you prefer to do it manually:
+
+1. Go to this URL (replace `YOUR_APP_KEY` with your actual app key):
+   ```
+   https://www.dropbox.com/oauth2/authorize?client_id=YOUR_APP_KEY&token_access_type=offline&response_type=code
+   ```
+
+2. You'll be redirected to Dropbox - click **Allow**
+
+3. You'll see an **authorization code** on the page - copy it
+
+4. Now exchange the code for a refresh token using this **curl command**:
+
+   **On Mac/Linux:**
+   ```bash
+   curl https://api.dropbox.com/oauth2/token \
+     -d code=YOUR_AUTHORIZATION_CODE \
+     -d grant_type=authorization_code \
+     -d client_id=YOUR_APP_KEY \
+     -d client_secret=YOUR_APP_SECRET
+   ```
+
+   **On Windows (PowerShell):**
+   ```powershell
+   curl -X POST https://api.dropbox.com/oauth2/token -d "code=YOUR_AUTHORIZATION_CODE&grant_type=authorization_code&client_id=YOUR_APP_KEY&client_secret=YOUR_APP_SECRET"
+   ```
+
+5. You'll get a JSON response like this:
+   ```json
+   {
+     "access_token": "sl.xxx...",
+     "token_type": "bearer",
+     "expires_in": 14400,
+     "refresh_token": "YOUR_REFRESH_TOKEN_HERE",
+     "scope": "...",
+     "uid": "...",
+     "account_id": "..."
+   }
+   ```
+
+6. **Copy the `refresh_token` value** - this is what you need!
+
+---
+
+## Step 5: Add Credentials to Netlify
 
 1. Go to [Netlify Dashboard](https://app.netlify.com)
-2. Select your site (tnlegal.ca or your site name)
+2. Select your site
 3. Go to **Site settings** → **Environment variables**
-4. Click **Add a variable**
-5. Add:
-   - **Key**: `DROPBOX_TOKEN`
-   - **Value**: [Paste your Dropbox access token]
-   - **Scopes**: Select "All scopes"
-6. Click **Save**
+4. Add these **three** environment variables:
+
+   | Key | Value |
+   |-----|-------|
+   | `DROPBOX_APP_KEY` | Your app key from Step 3 |
+   | `DROPBOX_APP_SECRET` | Your app secret from Step 3 |
+   | `DROPBOX_REFRESH_TOKEN` | Your refresh token from Step 4 |
+
+5. Click **Save**
 
 ---
 
-## Step 2: Setup Email Notifications (Netlify Forms)
-
-Netlify Forms will automatically email you when someone submits the form:
+## Step 6: Setup Email Notifications (Netlify Forms)
 
 1. In Netlify Dashboard, go to **Site settings** → **Forms**
 2. Click **Form notifications**
@@ -35,18 +133,20 @@ Netlify Forms will automatically email you when someone submits the form:
    - **Email to notify**: `info@tnlegal.ca`
 5. Click **Save**
 
-That's it! No SMTP setup needed - Netlify handles everything.
-
 ---
 
-## Step 3: Redeploy Your Site
+## Step 7: Deploy Your Site
 
-After adding the Dropbox token:
+1. Commit and push your code changes:
+   ```bash
+   git add .
+   git commit -m "Add Dropbox OAuth refresh token support"
+   git push
+   ```
 
-1. Go to **Deploys** tab in Netlify
-2. Click **Trigger deploy** → **Clear cache and deploy site**
-
-OR simply push a new commit to your Git repository to trigger a deployment.
+2. Or manually trigger deploy in Netlify:
+   - Go to **Deploys** tab
+   - Click **Trigger deploy** → **Clear cache and deploy site**
 
 ---
 
@@ -54,44 +154,25 @@ OR simply push a new commit to your Git repository to trigger a deployment.
 
 ### Complete Flow:
 
-1. **User fills out form** → Enters name, email, phone, service type, and uploads files
-2. **JavaScript reads files** → Converts to base64 in browser
-3. **Files sent to Netlify Function** → `/.netlify/functions/dropbox-upload`
-4. **Function uploads to Dropbox** → Using secure token from environment variables
-5. **Files are auto-named:** `FirstName LastName - DocumentType - 2025-10-20 - filename.pdf`
-6. **Form data submitted to Netlify Forms** → All form fields saved
-7. **Netlify sends email** → info@tnlegal.ca receives notification with all form details
+1. **User fills out form** → Uploads files
+2. **Netlify Function gets refresh token** → From environment variables
+3. **Function requests new access token** → Using refresh token (lasts 4 hours)
+4. **Files upload to Dropbox** → Using fresh access token
+5. **Files auto-named:** `FirstName LastName - DocumentType - 2025-10-20 - filename.pdf`
+6. **Form submitted to Netlify Forms** → Email sent to info@tnlegal.ca
 
-### Security Features:
+### Why Refresh Tokens?
 
-✅ Dropbox token stored in Netlify environment (never in code)
-✅ Token never exposed to browser/client
-✅ Function runs server-side only
-✅ Users can only upload files, not view/access your Dropbox
-✅ No SMTP credentials needed
+- ✅ **Access tokens** expire after 4 hours (security)
+- ✅ **Refresh tokens** never expire
+- ✅ Function automatically gets new access tokens as needed
+- ✅ No manual intervention required
 
 ---
 
-## File Naming Format
+## File Naming & Location
 
-Uploaded files are automatically renamed to:
-
-```
-FirstName LastName - DocumentType - 2025-10-20 - original-filename.pdf
-```
-
-Example:
-```
-John Smith - Affidavit - 2025-10-20 - document.pdf
-```
-
-This makes it easy to organize and find files in Dropbox.
-
----
-
-## Dropbox Folder Structure
-
-All files are uploaded to:
+Uploaded files are saved to:
 ```
 /notary-uploads/
   ├── John Smith - Affidavit - 2025-10-20 - doc1.pdf
@@ -99,70 +180,79 @@ All files are uploaded to:
   └── ...
 ```
 
-You can change this folder path by editing the `dropboxPath` in:
-`netlify/functions/dropbox-upload.js` (line 47)
+Format: `FirstName LastName - DocumentType - YYYY-MM-DD - original-filename.pdf`
+
+---
+
+## Troubleshooting
+
+### "Server configuration error - missing credentials"
+- **Cause:** Not all environment variables are set in Netlify
+- **Solution:** Make sure you added all 3 variables: `DROPBOX_APP_KEY`, `DROPBOX_APP_SECRET`, `DROPBOX_REFRESH_TOKEN`
+
+### "Failed to refresh token" error
+- **Cause:** Invalid app credentials or refresh token
+- **Solution:**
+  1. Double-check your app key and app secret in Dropbox App Console
+  2. Generate a new refresh token using the OAuth flow in Step 4
+  3. Update all 3 environment variables in Netlify
+
+### "missing_scope" error
+- **Cause:** App doesn't have required permissions
+- **Solution:**
+  1. Go to Dropbox App Console → Permissions tab
+  2. Enable all file permissions (metadata + content read/write)
+  3. **Generate a NEW refresh token** (old tokens don't get new permissions automatically)
+
+### Files not appearing in Dropbox
+- Check `/notary-uploads/` folder in your Dropbox
+- Check Netlify Function logs: **Functions** → **dropbox-upload**
+
+### Not receiving email notifications
+- Go to **Site settings** → **Forms** → **Form notifications**
+- Verify email notification is configured for `notary-request` form
+- Check spam/junk folder
 
 ---
 
 ## Testing Locally
 
-To test the Dropbox upload function locally:
+To test locally:
 
-1. Create a `.env` file in the project root:
+1. Create `.env` file in project root:
    ```
-   DROPBOX_TOKEN=your_token_here
+   DROPBOX_APP_KEY=your_app_key
+   DROPBOX_APP_SECRET=your_app_secret
+   DROPBOX_REFRESH_TOKEN=your_refresh_token
    ```
 
-2. Run Netlify Dev:
+2. Run:
    ```bash
    npm run dev
    ```
 
 3. Visit `http://localhost:8888/services-request.html`
 
-4. Submit the form with a test file
+4. Test file upload
 
-**⚠️ IMPORTANT:** Never commit the `.env` file to Git! It's already in `.gitignore`.
-
----
-
-## Troubleshooting
-
-### "Server configuration error"
-- Token not added to Netlify environment variables
-- Solution: Add `DROPBOX_TOKEN` in Netlify dashboard
-
-### "Failed to upload [filename]"
-- Invalid token or expired token
-- Solution: Generate a new token in Dropbox App Console
-
-### Files not appearing in Dropbox
-- Check the `/notary-uploads/` folder in your Dropbox
-- Check Netlify Function logs: **Netlify Dashboard → Functions → dropbox-upload**
-
-### Not receiving email notifications
-- Go to **Site settings** → **Forms** → **Form notifications** in Netlify
-- Make sure you've added an email notification for the `notary-request` form
-- Check your spam/junk folder for emails from Netlify
+**⚠️ Never commit `.env` to Git!**
 
 ---
 
-## Revoking/Changing the Token
+## Security Notes
 
-If you need to change or revoke your Dropbox token:
-
-1. Go to [Dropbox App Console](https://www.dropbox.com/developers/apps)
-2. Find your app
-3. Revoke the old token
-4. Generate a new token
-5. Update the `DROPBOX_TOKEN` in Netlify environment variables
-6. Redeploy your site
+✅ Refresh token stored securely in Netlify environment
+✅ App secret never exposed to browser
+✅ Access tokens generated server-side only
+✅ Users can only upload, not access your Dropbox
+✅ Tokens automatically refreshed as needed
 
 ---
 
-## Questions?
+## Need Help?
 
-If you encounter any issues, check:
-- Netlify Function logs (Netlify Dashboard → Functions)
-- Browser console for JavaScript errors
-- Dropbox App Console for API errors
+If you get stuck:
+1. Check Netlify Function logs
+2. Check browser console for errors
+3. Verify all environment variables are set correctly
+4. Make sure app has correct permissions enabled

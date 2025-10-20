@@ -1,11 +1,14 @@
 /**
- * Netlify Function: Secure Dropbox File Upload
+ * Netlify Function: Secure Dropbox File Upload with Refresh Token
  *
  * This function receives file uploads from the notary form and uploads them
- * to Dropbox securely. Email notifications are handled by Netlify Forms.
+ * to Dropbox securely using OAuth refresh tokens for long-term access.
+ * Email notifications are handled by Netlify Forms.
  *
  * Environment Variables Required:
- * - DROPBOX_TOKEN: Your Dropbox API access token
+ * - DROPBOX_APP_KEY: Your Dropbox app key (client ID)
+ * - DROPBOX_APP_SECRET: Your Dropbox app secret
+ * - DROPBOX_REFRESH_TOKEN: Your Dropbox refresh token (doesn't expire)
  */
 
 const https = require('https');
@@ -19,13 +22,14 @@ exports.handler = async (event, context) => {
     };
   }
 
-  // Check for Dropbox token
-  const DROPBOX_TOKEN = process.env.DROPBOX_TOKEN;
-  if (!DROPBOX_TOKEN) {
-    console.error('DROPBOX_TOKEN environment variable is not set');
+  // Check for required credentials
+  const { DROPBOX_APP_KEY, DROPBOX_APP_SECRET, DROPBOX_REFRESH_TOKEN } = process.env;
+
+  if (!DROPBOX_APP_KEY || !DROPBOX_APP_SECRET || !DROPBOX_REFRESH_TOKEN) {
+    console.error('Missing Dropbox credentials in environment variables');
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Server configuration error' })
+      body: JSON.stringify({ error: 'Server configuration error - missing credentials' })
     };
   }
 
@@ -40,6 +44,13 @@ exports.handler = async (event, context) => {
       };
     }
 
+    // Step 1: Get a fresh access token using refresh token
+    const accessToken = await getAccessTokenFromRefreshToken(
+      DROPBOX_APP_KEY,
+      DROPBOX_APP_SECRET,
+      DROPBOX_REFRESH_TOKEN
+    );
+
     // Generate formatted filename: "FirstName LastName - DocumentType - Date.pdf"
     const date = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
     const docType = notarizationType || 'Document';
@@ -52,7 +63,7 @@ exports.handler = async (event, context) => {
     const dropboxPath = `/notary-uploads/${formattedFileName}`;
 
     const uploadResult = await uploadToDropbox(
-      DROPBOX_TOKEN,
+      accessToken,
       dropboxPath,
       fileBuffer
     );
@@ -78,6 +89,55 @@ exports.handler = async (event, context) => {
     };
   }
 };
+
+/**
+ * Get a fresh access token using the refresh token
+ * Dropbox access tokens expire after 4 hours, but refresh tokens don't expire
+ */
+function getAccessTokenFromRefreshToken(appKey, appSecret, refreshToken) {
+  return new Promise((resolve, reject) => {
+    const postData = new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken,
+      client_id: appKey,
+      client_secret: appSecret
+    }).toString();
+
+    const options = {
+      hostname: 'api.dropboxapi.com',
+      path: '/oauth2/token',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Length': Buffer.byteLength(postData)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+
+      res.on('end', () => {
+        if (res.statusCode === 200) {
+          const response = JSON.parse(data);
+          resolve(response.access_token);
+        } else {
+          reject(new Error(`Failed to refresh token: ${res.statusCode} - ${data}`));
+        }
+      });
+    });
+
+    req.on('error', (error) => {
+      reject(error);
+    });
+
+    req.write(postData);
+    req.end();
+  });
+}
 
 /**
  * Upload a file to Dropbox using the v2 API
