@@ -1187,6 +1187,8 @@
         try {
           // Get form data
           const fullName = document.getElementById('full-name').value;
+          const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
           const notarizationType = document.getElementById('notarization-type').value;
           const fileInput = document.getElementById('documents');
           const files = fileInput.files;
@@ -1210,6 +1212,8 @@
                   fileName: file.name,
                   fileContent: fileContent,
                   fullName: fullName,
+                  email: email,
+                  phone: phone,
                   notarizationType: notarizationType
                 })
               });

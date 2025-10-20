@@ -1,8 +1,8 @@
 /**
  * Netlify Function: Secure Dropbox File Upload
  *
- * This function receives file uploads from the notary form and securely
- * uploads them to Dropbox using an access token stored in environment variables.
+ * This function receives file uploads from the notary form and uploads them
+ * to Dropbox securely. Email notifications are handled by Netlify Forms.
  *
  * Environment Variables Required:
  * - DROPBOX_TOKEN: Your Dropbox API access token
@@ -31,7 +31,7 @@ exports.handler = async (event, context) => {
 
   try {
     // Parse the incoming request body
-    const { fileName, fileContent, fullName, notarizationType } = JSON.parse(event.body);
+    const { fileName, fileContent, fullName, notarizationType, email, phone } = JSON.parse(event.body);
 
     if (!fileName || !fileContent) {
       return {
