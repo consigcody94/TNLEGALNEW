@@ -9,7 +9,18 @@
       "Bash(mkdir -p netlify/functions)",
       "Bash(chmod +x scripts/get-dropbox-refresh-token.js)",
       "Bash(node scripts/get-dropbox-refresh-token.js)",
-      "Bash(curl -X POST https://api.dropboxapi.com/oauth2/token -d \"code=eEdECLtxZ5gAAAAAAAAAMXQiiP0CeiiPh39VpIlnSP4&grant_type=authorization_code&client_id=lw3yc1hinxva71e&client_secret=o4zh9tif3exndxw\")"
+      "Bash(curl -X POST https://api.dropboxapi.com/oauth2/token -d \"code=eEdECLtxZ5gAAAAAAAAAMXQiiP0CeiiPh39VpIlnSP4&grant_type=authorization_code&client_id=lw3yc1hinxva71e&client_secret=o4zh9tif3exndxw\")",
+      "Skill(superpowers:brainstorming)",
+      "Bash(mkdir:*)",
+      "Skill(superpowers:using-git-worktrees)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git worktree:*)",
+      "Bash(npm install)",
+      "Bash(netlify dev)",
+      "Bash(npm install:*)",
+      "Bash(npx netlify dev)",
+      "Bash(node get-location-id.js:*)"
     ],
     "deny": [],
     "ask": []

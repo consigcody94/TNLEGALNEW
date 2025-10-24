@@ -30,6 +30,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/navigation.css" />
   <link rel="stylesheet" href="css/site.css" />
+  <script src="js/square-checkout.js"></script>
 
   <style>
     /* Layout Grid for Form + Sidebar */
@@ -755,14 +756,10 @@
                   </label>
                 </div>
 
-                <button type="submit" class="form-submit">Submit Service Request</button>
+                <button type="submit" class="form-submit">Proceed to Payment</button>
               </form>
 
-              <div class="success-message" id="notarySuccessMessage">
-                <h3>Request Submitted Successfully!</h3>
-                <p>Thank you for your service request. We have received your documents and information. Our team will review your submission and contact you within 24 hours to confirm your appointment details.</p>
-                <p style="margin-top: 1rem;"><a href="index.html" style="color: var(--pure-white); text-decoration: underline;">Return to Home</a></p>
-              </div>
+              <!-- Success message removed - customers now redirect to Square checkout immediately -->
             </div>
           </div>
 
@@ -1047,7 +1044,7 @@
 
                     <div style="display: flex; gap: 1rem; margin-top: 2rem;">
                       <button type="button" class="btn btn-secondary" id="backToAddons">← Back</button>
-                      <button type="submit" class="form-submit">Submit Order & Get Payment Link</button>
+                      <button type="submit" class="form-submit">Proceed to Payment</button>
                     </div>
                   </form>
 
@@ -1060,12 +1057,7 @@
                   </div>
                 </div>
 
-                <div class="success-message" id="businessSuccessMessage">
-                  <h3>Order Submitted Successfully!</h3>
-                  <p>Thank you for your business registration order! We've received your request and will send you a secure payment link within the next 2 hours.</p>
-                  <p style="margin-top: 1rem;">Once payment is received, we'll begin processing your registration immediately.</p>
-                  <p style="margin-top: 1rem;"><a href="index.html" style="color: var(--pure-white); text-decoration: underline;">Return to Home</a></p>
-                </div>
+                <!-- Success message removed - customers now redirect to Square checkout immediately -->
               </div>
 
               <!-- Order Summary Sidebar -->
@@ -1175,7 +1167,7 @@
         }
       });
 
-      // Form submission with Dropbox upload
+      // Form submission with Dropbox upload and Square checkout
       notaryForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         const submitButton = notaryForm.querySelector('.form-submit');
@@ -1190,6 +1182,8 @@
           const email = document.getElementById('email').value;
           const phone = document.getElementById('phone').value;
           const notarizationType = document.getElementById('notarization-type').value;
+          const numSignatures = document.getElementById('num-signatures').value;
+          const description = document.getElementById('description').value;
           const fileInput = document.getElementById('documents');
           const files = fileInput.files;
 
@@ -1224,24 +1218,53 @@
             }
           }
 
-          // Submit form data to Netlify Forms for email notifications
-          submitButton.textContent = 'Finalizing...';
-          const formData = new FormData(notaryForm);
+          // Calculate pricing: $45 for first document, $15 for each additional
+          submitButton.textContent = 'Processing payment...';
+          const basePrice = 45;
+          const additionalPrice = 15;
+          let numDocs = 1;
 
-          await fetch('/', {
-            method: 'POST',
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString(),
-          });
+          // Parse number of signatures
+          if (numSignatures === '1') {
+            numDocs = 1;
+          } else if (numSignatures === '2') {
+            numDocs = 2;
+          } else if (numSignatures === '3') {
+            numDocs = 3;
+          } else if (numSignatures === '4') {
+            numDocs = 4;
+          } else if (numSignatures === '5+') {
+            numDocs = 5;
+          }
 
-          // Show success message
-          notaryForm.style.display = 'none';
-          document.getElementById('notarySuccessMessage').style.display = 'block';
-          document.getElementById('notarySuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
+          const totalPrice = basePrice + ((numDocs - 1) * additionalPrice);
+
+          // Build order items
+          const items = [{
+            name: `Notary Service: ${notarizationType} (${numDocs} signature${numDocs > 1 ? 's' : ''})`,
+            price: totalPrice
+          }];
+
+          // Create order data for Square
+          const orderData = {
+            items: items,
+            amount: totalPrice,
+            customerEmail: email,
+            customerName: fullName,
+            customerPhone: phone,
+            serviceType: 'notary-service',
+            notes: `Notarization Type: ${notarizationType}\nNumber of Signatures: ${numSignatures}\nDescription: ${description}`
+          };
+
+          // Create checkout session
+          const squareCheckout = new SquareCheckout();
+          submitButton.textContent = 'Creating checkout...';
+
+          await squareCheckout.createCheckoutSession(orderData);
 
         } catch (error) {
           console.error('Form submission error:', error);
-          alert('There was an error uploading your files. Please try again or contact us directly.');
+          alert('There was an error processing your request. Please try again or contact us directly at admin@tnlegal.ca');
           submitButton.disabled = false;
           submitButton.textContent = originalText;
         }
@@ -1397,38 +1420,75 @@
     // Business registration form submission
     const businessForm = document.getElementById('business-registration-form');
     if (businessForm) {
-      businessForm.addEventListener('submit', function(e) {
+      businessForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
-        // Populate hidden fields
-        document.getElementById('businessTypeHidden').value = selectedBusinessType.name;
-        document.getElementById('addonsHidden').value = selectedAddons.map(a => a.name).join(', ');
-        document.getElementById('totalPriceHidden').value = document.getElementById('orderTotalAmount').textContent;
-
-        const formData = new FormData(businessForm);
         const submitButton = businessForm.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
 
-        submitButton.disabled = true;
-        submitButton.textContent = 'Submitting...';
+        try {
+          // Get form data
+          const fullName = document.getElementById('biz-full-name').value;
+          const email = document.getElementById('biz-email').value;
+          const phone = document.getElementById('biz-phone').value;
+          const companyName = document.getElementById('biz-company-name').value;
+          const notes = document.getElementById('biz-notes').value;
 
-        fetch('/', {
-          method: 'POST',
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(formData).toString(),
-        })
-          .then(() => {
-            businessForm.style.display = 'none';
-            document.querySelector('.guarantee-badge').style.display = 'none';
-            document.getElementById('businessSuccessMessage').style.display = 'block';
-            document.getElementById('businessSuccessMessage').scrollIntoView({ behavior: 'smooth', block: 'center' });
-          })
-          .catch((error) => {
-            console.error('Form submission error:', error);
-            alert('There was an error submitting your form. Please try again or contact us directly.');
-            submitButton.disabled = false;
-            submitButton.textContent = originalText;
+          // Build order items array
+          const items = [];
+
+          // Add base business type
+          items.push({
+            name: selectedBusinessType.name,
+            price: selectedBusinessType.price
           });
+
+          // Add all selected add-ons
+          selectedAddons.forEach(addon => {
+            items.push({
+              name: addon.name,
+              price: addon.price
+            });
+          });
+
+          // Calculate total
+          const total = selectedBusinessType.price + selectedAddons.reduce((sum, addon) => sum + addon.price, 0);
+
+          // Build complete notes with company name
+          let completeNotes = '';
+          if (companyName) {
+            completeNotes += `Desired Company Name: ${companyName}\n\n`;
+          }
+          if (notes) {
+            completeNotes += notes;
+          }
+
+          // Create order data for Square
+          const orderData = {
+            items: items,
+            amount: total,
+            customerEmail: email,
+            customerName: fullName,
+            customerPhone: phone,
+            serviceType: 'business-registration',
+            notes: completeNotes
+          };
+
+          // Create checkout session
+          const squareCheckout = new SquareCheckout();
+          submitButton.textContent = 'Creating checkout...';
+          submitButton.disabled = true;
+
+          await squareCheckout.createCheckoutSession(orderData);
+
+        } catch (error) {
+          console.error('Error creating checkout:', error);
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+
+          // Show error message
+          alert('There was an error creating your checkout session. Please try again or contact us directly at admin@tnlegal.ca');
+        }
       });
     }
   </script>

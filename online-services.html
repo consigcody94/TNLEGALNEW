@@ -30,6 +30,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/navigation.css" />
   <link rel="stylesheet" href="css/site.css" />
+  <script src="js/square-checkout.js"></script>
 </head>
 <body>
   <header id="header">
@@ -116,6 +117,7 @@
               <li>Available evenings and weekends</li>
               <li>Ideal for affidavits, statutory declarations, travel consents</li>
             </ul>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" onclick="bookVirtualNotary()">Book & Pay Now</button>
           </article>
           <article class="pricing-card">
             <div class="card__meta">Mobile</div>
@@ -127,6 +129,7 @@
               <li>Flexible group appointments</li>
               <li>Mileage quoted for surrounding regions</li>
             </ul>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" onclick="bookOnSiteVisit()">Book & Pay Now</button>
           </article>
           <article class="pricing-card">
             <div class="card__meta">Business Ready</div>
@@ -138,6 +141,7 @@
               <li>Digital signing rooms with audit trails</li>
               <li>Optional minute-book updates</li>
             </ul>
+            <a href="contact.html" class="btn btn-secondary" style="width: 100%; margin-top: 1.5rem; display: block; text-align: center; text-decoration: none;">Contact Us for Quote</a>
           </article>
         </div>
       </div>
@@ -202,6 +206,89 @@
   </footer>
 
   <script src="js/site.js"></script>
+  <script>
+    // Quick checkout functions for pricing cards
+    async function bookVirtualNotary() {
+      try {
+        // Prompt for customer information
+        const name = prompt('Please enter your full name:');
+        if (!name) return;
+
+        const email = prompt('Please enter your email address:');
+        if (!email || !email.includes('@')) {
+          alert('Please enter a valid email address');
+          return;
+        }
+
+        const phone = prompt('Please enter your phone number:');
+        if (!phone) return;
+
+        // Create order for Virtual Notary Session
+        const orderData = {
+          items: [{
+            name: 'Virtual Notary Session (1 document)',
+            price: 45
+          }],
+          amount: 45,
+          customerEmail: email,
+          customerName: name,
+          customerPhone: phone,
+          serviceType: 'virtual-notary',
+          notes: 'Booked from online-services pricing card'
+        };
+
+        // Create checkout session
+        const squareCheckout = new SquareCheckout();
+        await squareCheckout.createCheckoutSession(orderData);
+
+      } catch (error) {
+        console.error('Error creating checkout:', error);
+        alert('There was an error creating your checkout session. Please try again or contact us at admin@tnlegal.ca');
+      }
+    }
+
+    async function bookOnSiteVisit() {
+      try {
+        // Prompt for customer information
+        const name = prompt('Please enter your full name:');
+        if (!name) return;
+
+        const email = prompt('Please enter your email address:');
+        if (!email || !email.includes('@')) {
+          alert('Please enter a valid email address');
+          return;
+        }
+
+        const phone = prompt('Please enter your phone number:');
+        if (!phone) return;
+
+        const address = prompt('Please enter the address for the on-site visit:');
+        if (!address) return;
+
+        // Create order for On-Site Visit
+        const orderData = {
+          items: [{
+            name: 'On-Site Notary Visit (Ottawa core)',
+            price: 95
+          }],
+          amount: 95,
+          customerEmail: email,
+          customerName: name,
+          customerPhone: phone,
+          serviceType: 'on-site-visit',
+          notes: `Visit Address: ${address}\n\nBooked from online-services pricing card`
+        };
+
+        // Create checkout session
+        const squareCheckout = new SquareCheckout();
+        await squareCheckout.createCheckoutSession(orderData);
+
+      } catch (error) {
+        console.error('Error creating checkout:', error);
+        alert('There was an error creating your checkout session. Please try again or contact us at admin@tnlegal.ca');
+      }
+    }
+  </script>
 <!-- Calendly badge widget begin -->
 <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
