@@ -56,12 +56,17 @@ header.scrolled {
 }
 
 .nav-logo-text {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 2px;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 3px;
   color: #fff;
-  font-weight: 700;
+  font-weight: 800;
   text-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 /* Main Navigation */
@@ -83,9 +88,10 @@ header.scrolled {
 .nav-link {
   color: #c0c0c0;
   text-decoration: none;
-  font-size: 0.95rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.9rem;
   font-weight: 500;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
   padding: 0.5rem 0;
   display: block;
   transition: color 0.3s ease;
@@ -117,9 +123,11 @@ header.scrolled {
   background: linear-gradient(135deg, #c0c0c0 0%, #e5e4e2 100%);
   color: #000;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
   border-radius: 6px;
   transition: all 0.3s ease;
   white-space: nowrap;
