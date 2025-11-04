@@ -30,10 +30,10 @@ html {
 }
 
 body {
-  font-family: 'Cormorant Garamond', 'Playfair Display', 'Times New Roman', serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   color: var(--pure-white);
   background-color: var(--pure-black);
-  line-height: 1.75;
+  line-height: 1.7;
   letter-spacing: 0.015em;
   min-height: 100vh;
   position: relative;
@@ -107,6 +107,7 @@ section {
 
 .section-heading__eyebrow {
   display: inline-block;
+  font-family: 'Inter', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -116,9 +117,10 @@ section {
 }
 
 .section-heading__title {
-  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(1.8rem, 4vw, 2.75rem);
-  letter-spacing: 0.5px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
   margin-bottom: 1rem;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.15), 0 0 60px rgba(192, 192, 192, 0.08);
   animation: subtleGlow 4s ease-in-out infinite alternate;
@@ -192,7 +194,9 @@ section {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
+  font-family: 'Inter', sans-serif;
   font-size: 0.75rem;
+  font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--silver);
@@ -200,9 +204,10 @@ section {
 }
 
 .page-hero__title {
-  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(2.3rem, 6vw, 3.6rem);
-  letter-spacing: 0.5px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
   margin-bottom: 1.25rem;
   text-shadow: 0 0 35px rgba(255, 255, 255, 0.2), 0 0 70px rgba(192, 192, 192, 0.1);
   animation: subtleGlow 4s ease-in-out infinite alternate;
@@ -228,11 +233,12 @@ section {
   border-radius: 4px;
   border: 2px solid transparent;
   text-decoration: none;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   letter-spacing: 0.6px;
   text-transform: uppercase;
   font-size: 0.85rem;
-  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo), background 0.3s; 
+  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo), background 0.3s;
 }
 
 .btn-primary {
@@ -307,10 +313,11 @@ section {
 }
 
 .card__title {
-  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.3rem;
+  font-weight: 700;
   margin-bottom: 0.75rem;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.2px;
   text-shadow: 0 0 25px rgba(255, 255, 255, 0.12), 0 0 50px rgba(192, 192, 192, 0.06);
   transition: text-shadow 0.3s var(--ease-out-expo);
   text-decoration: underline;
@@ -399,11 +406,11 @@ section {
 }
 
 .team-card__name {
-  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.35rem;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.2px;
 }
 
 .team-card__role {
@@ -811,9 +818,10 @@ footer {
 .footer-brand {
   display: flex;
   align-items: center;
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 2px;
-  font-size: 1.2rem;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  letter-spacing: 3px;
+  font-size: 1.1rem;
+  font-weight: 700;
   text-transform: uppercase;
   color: var(--silver);
 }
@@ -1001,13 +1009,13 @@ footer {
 }
 
 .news-card__title {
-  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.4;
   margin-bottom: 0.75rem;
   color: var(--pure-white);
-  letter-spacing: 0.5px;
+  letter-spacing: -0.2px;
   text-shadow: 0 0 25px rgba(255, 255, 255, 0.12), 0 0 50px rgba(192, 192, 192, 0.06);
   transition: text-shadow 0.3s var(--ease-out-expo);
 }
@@ -1080,9 +1088,10 @@ footer {
 }
 
 .article-hero__title {
-  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(2rem, 5vw, 3.2rem);
-  letter-spacing: 0.5px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
   line-height: 1.25;
   margin-bottom: 1.5rem;
   max-width: 900px;
@@ -1113,19 +1122,21 @@ footer {
 }
 
 .article-content h2 {
-  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700;
   margin-top: 2.5rem;
   margin-bottom: 1.25rem;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.3px;
 }
 
 .article-content h3 {
-  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-weight: 700;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.2px;
 }
 
 .article-content p {
