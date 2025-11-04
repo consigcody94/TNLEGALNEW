@@ -83,6 +83,7 @@
     stats.forEach(stat => {
       const text = stat.textContent;
       const hasPlus = text.includes('+');
+      const hasPercent = text.includes('%');
       const number = parseInt(text.replace(/\D/g, ''));
 
       if (!isNaN(number)) {
@@ -98,7 +99,13 @@
               ease: 'power1.out',
               onUpdate: function() {
                 const current = Math.ceil(this.targets()[0].textContent);
-                stat.textContent = hasPlus ? current + '+' : current;
+                if (hasPercent) {
+                  stat.textContent = current + '%';
+                } else if (hasPlus) {
+                  stat.textContent = current + '+';
+                } else {
+                  stat.textContent = current;
+                }
               }
             });
           }
