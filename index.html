@@ -780,104 +780,40 @@
     }
 
     .loader-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-      max-height: 90vh;
-      padding: 2rem 1rem;
+      text-align: center;
     }
 
-    .loader-video-container {
-      position: relative;
-      max-width: min(700px, 80vw);
-      width: 100%;
-      border-radius: 20px;
-      border: 3px solid rgba(255,255,255,0.2);
-      box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        0 0 80px rgba(255,255,255,0.15);
-      overflow: hidden;
-    }
-
-    .loader-video {
-      width: 100%;
+    .loader-logo {
+      width: 200px;
       height: auto;
-      max-height: 50vh;
-      display: block;
-      filter: contrast(1.1) brightness(1.05) saturate(1.15);
+      margin: 0 auto 2rem;
+      animation: tiltScales 2.5s ease-in-out infinite;
     }
 
-    .loader-text-container {
-      display: flex;
-      gap: clamp(0.3rem, 2vw, 1rem);
-      font-family: 'Cinzel', 'Playfair Display', serif;
-      font-size: clamp(1.5rem, 6vw, 3.5rem);
-      letter-spacing: clamp(4px, 1.5vw, 12px);
-      color: var(--pure-white);
-      font-weight: 300;
-      text-shadow: 0 0 40px rgba(255,255,255,0.3), 0 0 80px rgba(192, 192, 192, 0.2);
-    }
-
-    .loader-letter {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: letterFadeIn 0.5s ease forwards;
-    }
-
-    .loader-letter:nth-child(1) { animation-delay: 0.1s; }
-    .loader-letter:nth-child(2) { animation-delay: 0.2s; }
-    .loader-letter:nth-child(3) { animation-delay: 0.3s; }
-    .loader-letter:nth-child(4) { animation-delay: 0.4s; }
-    .loader-letter:nth-child(5) { animation-delay: 0.5s; }
-    .loader-letter:nth-child(6) { animation-delay: 0.6s; }
-    .loader-letter:nth-child(7) { animation-delay: 0.7s; }
-
-    @keyframes letterFadeIn {
-      to {
-        opacity: 1;
-        transform: translateY(0);
+    @keyframes tiltScales {
+      0%, 100% {
+        transform: rotate(-8deg);
       }
+      50% {
+        transform: rotate(8deg);
+      }
+    }
+
+    .loader-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 4px;
+      color: var(--silver);
     }
 
     /* ========== RESPONSIVE ========== */
     @media (max-width: 768px) {
-      .loader-content {
-        gap: 1.5rem;
-        padding: 1rem 0.5rem;
-        max-height: 95vh;
+      .loader-logo {
+        width: 150px;
       }
 
-      .loader-video-container {
-        max-width: 90vw;
-        border-radius: 16px;
-        border-width: 2px;
-      }
-
-      .loader-video {
-        max-height: 40vh;
-      }
-
-      .loader-text-container {
-        font-size: clamp(1.2rem, 5vw, 1.8rem);
-        letter-spacing: clamp(2px, 1vw, 6px);
-        gap: 0.3rem;
-      }
-    }
-
-    @media (max-height: 700px) {
-      .loader-content {
-        max-height: 95vh;
-        gap: 1rem;
-      }
-
-      .loader-video {
-        max-height: 35vh;
-      }
-
-      .loader-text-container {
-        font-size: clamp(1.2rem, 5vw, 2rem);
+      .loader-text {
+        font-size: 1.2rem;
       }
     }
 
@@ -999,20 +935,8 @@
   <!-- Loading Screen -->
   <div class="loader" id="loader">
     <div class="loader-content">
-      <div class="loader-video-container">
-        <video class="loader-video" autoplay muted loop playsinline>
-          <source src="loading.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="loader-text-container">
-        <span class="loader-letter">L</span>
-        <span class="loader-letter">O</span>
-        <span class="loader-letter">A</span>
-        <span class="loader-letter">D</span>
-        <span class="loader-letter">I</span>
-        <span class="loader-letter">N</span>
-        <span class="loader-letter">G</span>
-      </div>
+      <img src="lady.png" alt="TN Legal" class="loader-logo">
+      <div class="loader-text">LOADING</div>
     </div>
   </div>
 
