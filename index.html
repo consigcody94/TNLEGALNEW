@@ -31,6 +31,10 @@
   <link rel="stylesheet" href="css/navigation.css" />
   <link rel="stylesheet" href="css/news-premium.css" />
 
+  <!-- Animation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <style>
     /* ========== DESIGN SYSTEM ========== */
     :root {
@@ -65,35 +69,26 @@
       position: relative;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Advanced parallax background with proper blending */
-    body::before {
-      content: '';
+    /* Site-wide video background */
+    .site-background-video {
       position: fixed;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
       width: 100%;
-      height: 100vh;
-      background-image:
-        radial-gradient(circle at 20% 10%, rgba(255,255,255,0.06), transparent 55%),
-        url('background2.png'),
-        url('background.png');
-      background-repeat: no-repeat;
-      background-position: center, center 35%, center;
-      background-size: 180% 180%, cover, cover;
-      opacity: 0.38;
-      mix-blend-mode: screen;
-      filter: brightness(0.95) contrast(1.08) saturate(1.05);
-      will-change: transform;
-      animation: backgroundDrift 48s ease-in-out infinite alternate;
-      z-index: -1;
+      height: 100%;
+      object-fit: fill;
+      z-index: -2;
       pointer-events: none;
+      opacity: 0.5;
+      filter: contrast(1.15) brightness(1.1) saturate(1.2) blur(1px);
+      transform: scale(1.02);
     }
 
-    /* Gradient overlay for better blending */
+    /* Stronger overlay for readability */
     body::after {
       content: '';
       position: fixed;
@@ -101,9 +96,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(0,0,0,0.45) 0%, transparent 55%),
-        linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.6) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.85) 100%);
       z-index: -1;
       pointer-events: none;
     }
@@ -117,22 +110,18 @@
 
     /* ========== HERO SECTION ========== */
     .hero {
-      min-height: 85vh;
+      min-height: 90vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 150px 2rem 80px;
-      background: radial-gradient(ellipse at 50% 30%, rgba(192,192,192,0.05) 0%, transparent 60%);
+      padding: 120px 0 80px;
+      background: transparent;
       opacity: 0;
       animation: fadeInSection 0.8s ease-out 0.2s forwards;
+      position: relative;
     }
 
 
-    @keyframes backgroundDrift {
-      0% { transform: translate3d(-2%, -2%, 0) scale(1.02); }
-      50% { transform: translate3d(2%, 2%, 0) scale(1.05); }
-      100% { transform: translate3d(-1%, 3%, 0) scale(1.02); }
-    }
 
     @keyframes fadeInSection {
       from {
@@ -150,64 +139,47 @@
       display: flex;
       justify-content: center;
       padding: 0 1.5rem;
+      position: relative;
+      z-index: 2;
     }
 
     .hero-box {
       position: relative;
-      max-width: 620px;
+      max-width: 900px;
       width: 100%;
-      padding: clamp(2rem, 5vw, 2.75rem);
-      border-radius: 24px;
-      background: rgba(12, 12, 12, 0.92);
-      border: 1px solid rgba(255,255,255,0.25);
-      box-shadow:
-        0 28px 60px rgba(0, 0, 0, 0.6),
-        0 0 80px rgba(192, 192, 192, 0.3),
-        0 0 120px rgba(255, 255, 255, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      overflow: hidden;
+      padding: clamp(3rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3rem);
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: none;
+      overflow: visible;
       text-align: center;
-      animation: heroBoxGlow 4s ease-in-out infinite alternate;
-    }
-
-    @keyframes heroBoxGlow {
-      0% {
-        box-shadow:
-          0 28px 60px rgba(0, 0, 0, 0.6),
-          0 0 60px rgba(192, 192, 192, 0.2),
-          0 0 100px rgba(255, 255, 255, 0.1),
-          inset 0 1px 0 rgba(255, 255, 255, 0.2);
-      }
-      100% {
-        box-shadow:
-          0 28px 60px rgba(0, 0, 0, 0.6),
-          0 0 100px rgba(192, 192, 192, 0.4),
-          0 0 140px rgba(255, 255, 255, 0.2),
-          inset 0 1px 0 rgba(255, 255, 255, 0.3);
-      }
     }
 
     .hero-box::before {
       content: '';
       position: absolute;
-      inset: -45%;
-      background: conic-gradient(from 45deg, rgba(255,255,255,0.4), rgba(120,120,120,0.02), rgba(255,255,255,0.35));
-      filter: blur(48px);
-      opacity: 0.55;
-      mix-blend-mode: screen;
-      animation: heroGlow 9s ease-in-out infinite alternate;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
     }
 
     .hero-box::after {
       content: '';
       position: absolute;
-      inset: 0;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.25);
-      mix-blend-mode: screen;
-      pointer-events: none;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
     }
 
     .hero-box > * {
@@ -325,16 +297,11 @@
       background: rgba(255,255,255,0.01);
     }
 
-    /* Scroll reveal animations */
+    /* Service cards visible by default */
     .service-card {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-
-    .service-card.reveal {
       opacity: 1;
       transform: translateY(0);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
 
     .service-card:nth-child(1) { transition-delay: 0.1s; }
@@ -353,6 +320,8 @@
     .section-header {
       text-align: center;
       margin-bottom: 60px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .section-label {
@@ -369,6 +338,10 @@
       font-size: clamp(2rem, 4vw, 2.75rem);
       margin-bottom: 1rem;
       letter-spacing: 0.5px;
+      text-decoration: underline;
+      text-decoration-color: rgba(255,255,255,0.3);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 8px;
     }
 
     .section-desc {
@@ -383,15 +356,20 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 2rem;
+      margin: 0 auto;
+      justify-items: center;
     }
 
     .services-grid .service-card {
-      background: rgba(10, 10, 10, 0.85);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(10, 10, 10, 0.95);
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: 8px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      transform-style: preserve-3d;
+      transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+      opacity: 1 !important;
     }
 
     .services-grid .service-card:hover {
@@ -407,31 +385,29 @@
     }
 
 
-    /* Image container with soft glow for transparent service icons */
+    /* Image container for service photos */
     .service-image-wrapper {
       width: 100%;
       height: 0;
       padding-bottom: 60%;
       position: relative;
       overflow: hidden;
-      background: radial-gradient(circle at 50% 42%, rgba(255,255,255,0.18), rgba(255,255,255,0.02) 75%);
+      background: rgba(0,0,0,0.3);
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
     .service-image-wrapper::after {
       content: '';
       position: absolute;
-      inset: 14%;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.03));
-      mix-blend-mode: screen;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%);
       pointer-events: none;
-      opacity: 0.7;
+      opacity: 0.6;
       transition: opacity 0.3s ease;
     }
 
     .service-card:hover .service-image-wrapper::after {
-      opacity: 0.95;
+      opacity: 0.3;
     }
 
     .service-icon {
@@ -439,13 +415,11 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       object-position: center;
       display: block;
-      padding: 1.5rem;
       transition: transform 0.3s ease, filter 0.3s ease;
       background: transparent !important;
-      filter: drop-shadow(0 14px 28px rgba(0,0,0,0.35));
     }
 
     .service-card:hover .service-icon {
@@ -462,6 +436,7 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+      background: rgba(0, 0, 0, 0.4);
     }
 
     .service-title {
@@ -470,10 +445,11 @@
       font-weight: 600;
       margin-bottom: 0.75rem;
       letter-spacing: 0.5px;
+      color: var(--pure-white);
     }
 
     .service-desc {
-      color: var(--silver);
+      color: var(--platinum);
       line-height: 1.7;
       margin-bottom: 1rem;
       font-size: 1.05rem;
@@ -502,14 +478,9 @@
     .about {
       padding: 80px 0;
       background: transparent;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .about.reveal {
       opacity: 1;
       transform: translateY(0);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
 
     .about-content {
@@ -590,14 +561,9 @@
     .contact {
       padding: 80px 0;
       background: rgba(255,255,255,0.01);
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .contact.reveal {
       opacity: 1;
       transform: translateY(0);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
 
     .contact-content {
@@ -798,43 +764,93 @@
     .loader {
       position: fixed;
       inset: 0;
-      background: var(--pure-black);
+      background: transparent;
+      backdrop-filter: blur(10px);
       z-index: 10000;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
     }
 
     .loader.loaded {
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
     }
 
     .loader-content {
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3rem;
     }
 
-    .loader-logo {
-      width: 80px;
-      height: auto;
-      margin: 0 auto 2rem;
-      animation: pulse-loader 2s ease-in-out infinite;
+    .loader-video-circle {
+      position: relative;
+      width: 80vh;
+      height: 80vh;
+      max-width: 800px;
+      max-height: 800px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid rgba(255,255,255,0.25);
+      box-shadow:
+        0 0 80px rgba(255,255,255,0.2),
+        0 0 160px rgba(192,192,192,0.1);
     }
 
-    @keyframes pulse-loader {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.8; }
+    .loader-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: contrast(1.1) brightness(1.05) saturate(1.15);
     }
 
-    .loader-text {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      letter-spacing: 4px;
-      color: var(--silver);
+    .loader-text-container {
+      display: flex;
+      gap: 0.5rem;
+      font-family: 'Cinzel', 'Playfair Display', serif;
+      font-size: 2rem;
+      letter-spacing: 8px;
+      color: var(--pure-white);
+      font-weight: 600;
+    }
+
+    .loader-letter {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: letterFadeIn 0.5s ease forwards;
+    }
+
+    .loader-letter:nth-child(1) { animation-delay: 0.1s; }
+    .loader-letter:nth-child(2) { animation-delay: 0.2s; }
+    .loader-letter:nth-child(3) { animation-delay: 0.3s; }
+    .loader-letter:nth-child(4) { animation-delay: 0.4s; }
+    .loader-letter:nth-child(5) { animation-delay: 0.5s; }
+    .loader-letter:nth-child(6) { animation-delay: 0.6s; }
+    .loader-letter:nth-child(7) { animation-delay: 0.7s; }
+
+    @keyframes letterFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ========== RESPONSIVE ========== */
+    @media (max-width: 768px) {
+      .loader-video-circle {
+        width: 280px;
+        height: 280px;
+      }
+
+      .loader-text-container {
+        font-size: 1.5rem;
+        letter-spacing: 4px;
+      }
+    }
+
     @media (max-width: 1024px) {
       .about-content,
       .contact-content {
@@ -945,11 +961,28 @@
   </style>
 </head>
 <body>
+  <!-- Site-wide Background Video -->
+  <video class="site-background-video" autoplay muted playsinline>
+    <source src="background.mp4" type="video/mp4">
+  </video>
+
   <!-- Loading Screen -->
   <div class="loader" id="loader">
     <div class="loader-content">
-      <img src="lady.png" alt="TN Legal" class="loader-logo">
-      <div class="loader-text">LOADING</div>
+      <div class="loader-video-circle">
+        <video class="loader-video" autoplay muted loop playsinline>
+          <source src="loading.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="loader-text-container">
+        <span class="loader-letter">L</span>
+        <span class="loader-letter">O</span>
+        <span class="loader-letter">A</span>
+        <span class="loader-letter">D</span>
+        <span class="loader-letter">I</span>
+        <span class="loader-letter">N</span>
+        <span class="loader-letter">G</span>
+      </div>
     </div>
   </div>
 
@@ -1011,7 +1044,7 @@
       <div class="services-grid">
         <div class="service-card">
           <div class="service-image-wrapper">
-            <img src="familylaw.png" alt="Family Law" class="service-icon">
+            <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80" alt="Family Law - Happy family" class="service-icon">
           </div>
           <div class="service-content">
             <h3 class="service-title">Family Law</h3>
@@ -1022,7 +1055,7 @@
 
         <div class="service-card">
           <div class="service-image-wrapper">
-            <img src="corporate.png" alt="Corporate Law" class="service-icon">
+            <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80" alt="Corporate Law - Business meeting" class="service-icon">
           </div>
           <div class="service-content">
             <h3 class="service-title">Corporate Law</h3>
@@ -1033,7 +1066,7 @@
 
         <div class="service-card">
           <div class="service-image-wrapper">
-            <img src="Real Estate Transactions.png" alt="Real Estate Law" class="service-icon">
+            <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="Real Estate Law - House with keys" class="service-icon">
           </div>
           <div class="service-content">
             <h3 class="service-title">Real Estate Law</h3>
@@ -1044,7 +1077,7 @@
 
         <div class="service-card">
           <div class="service-image-wrapper">
-            <img src="Intellectual Property Law.png" alt="Intellectual Property" class="service-icon">
+            <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&q=80" alt="Intellectual Property - Innovation and ideas" class="service-icon">
           </div>
           <div class="service-content">
             <h3 class="service-title">Intellectual Property</h3>
@@ -1055,7 +1088,7 @@
 
         <div class="service-card">
           <div class="service-image-wrapper">
-            <img src="Litigation Services.png" alt="Litigation Services" class="service-icon">
+            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80" alt="Litigation Services - Courtroom gavel" class="service-icon">
           </div>
           <div class="service-content">
             <h3 class="service-title">Litigation Services</h3>
@@ -1066,7 +1099,7 @@
 
         <div class="service-card">
           <div class="service-image-wrapper">
-            <img src="Notary Services.png" alt="Notary Services" class="service-icon">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80" alt="Notary Services - Document signing" class="service-icon">
           </div>
           <div class="service-content">
             <h3 class="service-title">Notary Services</h3>
@@ -1224,6 +1257,7 @@
   </footer>
 
   <script src="js/site.js"></script>
+  <script src="js/visual-effects.js"></script>
 
   <script>
     // Loader

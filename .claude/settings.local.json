@@ -20,7 +20,18 @@
       "Bash(netlify dev)",
       "Bash(npm install:*)",
       "Bash(npx netlify dev)",
-      "Bash(node get-location-id.js:*)"
+      "Bash(node get-location-id.js:*)",
+      "Bash(netlify dev:*)",
+      "Bash(npx netlify dev:*)",
+      "Bash(for file in contact.html services.html news.html)",
+      "Bash(do)",
+      "Bash(if ! grep -q \"site-background-video\" \"$file\")",
+      "Bash(then)",
+      "Bash(echo:*)",
+      "Bash(else)",
+      "Bash(fi)",
+      "Bash(done)",
+      "Bash(/home/cody/tnlegal/services.html)"
     ],
     "deny": [],
     "ask": []
