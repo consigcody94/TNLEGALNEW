@@ -122,6 +122,10 @@ section {
   margin-bottom: 1rem;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.15), 0 0 60px rgba(192, 192, 192, 0.08);
   animation: subtleGlow 4s ease-in-out infinite alternate;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,0.3);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
 }
 
 @keyframes subtleGlow {
@@ -309,6 +313,10 @@ section {
   letter-spacing: 0.5px;
   text-shadow: 0 0 25px rgba(255, 255, 255, 0.12), 0 0 50px rgba(192, 192, 192, 0.06);
   transition: text-shadow 0.3s var(--ease-out-expo);
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,0.3);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 .card:hover .card__title {
@@ -539,6 +547,10 @@ section {
   font-size: 1.15rem;
   font-weight: 600;
   margin-bottom: 1rem;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,0.3);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
 }
 
 .contact-list {
