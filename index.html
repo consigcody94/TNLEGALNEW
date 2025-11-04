@@ -809,12 +809,13 @@
 
     .loader-text-container {
       display: flex;
-      gap: 0.5rem;
+      gap: 1rem;
       font-family: 'Cinzel', 'Playfair Display', serif;
-      font-size: 2rem;
-      letter-spacing: 8px;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      letter-spacing: 12px;
       color: var(--pure-white);
-      font-weight: 600;
+      font-weight: 300;
+      text-shadow: 0 0 40px rgba(255,255,255,0.3), 0 0 80px rgba(192, 192, 192, 0.2);
     }
 
     .loader-letter {
@@ -969,11 +970,6 @@
   <!-- Loading Screen -->
   <div class="loader" id="loader">
     <div class="loader-content">
-      <div class="loader-video-circle">
-        <video class="loader-video" autoplay muted loop playsinline>
-          <source src="loading.mp4" type="video/mp4">
-        </video>
-      </div>
       <div class="loader-text-container">
         <span class="loader-letter">L</span>
         <span class="loader-letter">O</span>
