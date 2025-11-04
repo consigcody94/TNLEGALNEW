@@ -81,24 +81,24 @@
     // Stats counter animation
     const stats = document.querySelectorAll('.stat-number');
     stats.forEach(stat => {
-      const text = stat.textContent;
+      const text = stat.textContent.trim();
       const hasPlus = text.includes('+');
       const hasPercent = text.includes('%');
       const number = parseInt(text.replace(/\D/g, ''));
 
-      if (!isNaN(number)) {
+      if (!isNaN(number) && number > 0) {
         ScrollTrigger.create({
           trigger: stat,
           start: 'top 80%',
           once: true,
           onEnter: () => {
-            gsap.from(stat, {
+            const counter = { value: 0 };
+            gsap.to(counter, {
+              value: number,
               duration: 2,
-              textContent: 0,
-              snap: { textContent: 1 },
               ease: 'power1.out',
               onUpdate: function() {
-                const current = Math.ceil(this.targets()[0].textContent);
+                const current = Math.ceil(counter.value);
                 if (hasPercent) {
                   stat.textContent = current + '%';
                 } else if (hasPlus) {
